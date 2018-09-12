@@ -3,3 +3,5 @@
 ################################################################################
 
 /SimpleWebApp/.vs
+/SimpleWebApp/SimpleWebApp/bin/Debug/netcoreapp2.0
+/SimpleWebApp/SimpleWebApp/obj
