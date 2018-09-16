@@ -3,7 +3,8 @@
 namespace dotNetBasics
 {
     static class Program
-    {
+    {        
+
         public static void Main(string[] args)
         {
             // Ну куда же без Hello world
@@ -110,6 +111,41 @@ namespace dotNetBasics
                 Console.WriteLine(e.Message);
             }
             #endregion
+
+            #region Про Nullable
+            int? nullable_a = 42;
+            Console.WriteLine(nullable_a?.ToString()); // Метод применяется, если объект не null
+            int? null_a = null;
+            int x_from_null = null_a ?? nullable_a ?? 5; // как тренарный оператор только про null
+            Console.WriteLine($"x={x_from_null}");
+            #endregion
+
+            #region Про перечисления
+            Color color = Color.Blue;
+            Console.WriteLine(color);
+            color = (Color)Enum.Parse(typeof(Color), "Red");
+            Console.WriteLine(color);
+            color = (Color)Enum.Parse(typeof(Color), "0");
+            Console.WriteLine(color);
+
+            Permission permission = Permission.Move | Permission.Write;
+            Console.WriteLine(permission.ToString());
+            #endregion
+        }
+
+        enum Color : int
+        {
+            Gray, Blue, Red
+        }
+
+        [Flags]
+        enum Permission
+        {
+            None = 0,
+            Read = 1,
+            Write = 2,
+            ReadWrite = Read | Write,
+            Move = 8
         }
 
         #region Для RefType и ValueType 
