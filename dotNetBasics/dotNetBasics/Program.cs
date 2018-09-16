@@ -145,7 +145,7 @@ namespace dotNetBasics
             Read = 1,
             Write = 2,
             ReadWrite = Read | Write,
-            Move = 8
+            Move = 4
         }
 
         #region Для RefType и ValueType 
