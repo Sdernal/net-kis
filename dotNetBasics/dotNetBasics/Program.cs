@@ -83,6 +83,33 @@ namespace dotNetBasics
                     // Попробуем поменять кейсы местами
             }
             #endregion
+
+            #region Контроль переполнения 
+            byte byteA = 200;
+            byte byteB;
+            try
+            {
+                byteB = checked((byte)(2 * byteA));
+                //byteB = unchecked((byte)(2 * byteA));
+                //byteB = (byte)checked(2 * byteA);
+                Console.WriteLine(byteB);
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+            try
+            {
+                checked
+                {
+                    byteB = checked((byte)(2 * byteA));
+                    Console.WriteLine(byteB);
+                }                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            #endregion
         }
 
         #region Для RefType и ValueType 
