@@ -23,7 +23,7 @@ namespace SimpleWebApp
         // По-умолчанию Visual Studio конфигурирует сервер следующим образом
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args) 
-                .UseStartup<Startup>() // В классе Startup находится логика обработки запросов
+                .UseStartup<Startup3>() // В классе Startup находится логика обработки запросов
                 .Build();
 
         // Но никто не мешает нам самим сконфигурировать IWebHost
