@@ -24,6 +24,7 @@ namespace SimpleWebApp
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args) 
                 .UseStartup<Startup3>() // В классе Startup находится логика обработки запросов
+                //.ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.Trace))
                 .Build();
 
         // Но никто не мешает нам самим сконфигурировать IWebHost
