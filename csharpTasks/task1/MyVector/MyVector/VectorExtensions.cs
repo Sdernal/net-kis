@@ -22,31 +22,59 @@ namespace MyVector
         // Нормализовать вектор
         public static Vector Normalize(this Vector v)
         {
-            throw new NotImplementedException();
+            // не хочется писать сложные проверки с EPS
+            // здесь и далее полагаем, что данный класс не используется
+            // в точных математических рассчетах; также полагаем, что
+            // пользователь "умный" и знает основы геометрии
+            if (v.Length() != 0)
+            {
+                return v / v.Length();
+            }
+            return new Vector();
         }
 
-        // Получить угол между векторами в радианах
+        /// <summary>
+        /// Получить угол между векторами в радианах
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="u"></param>
+        /// <returns></returns>
         public static double GetAngleBetween(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            return Math.Atan2(v.CrossProduct(u), v.DotProduct(u));
         }
 
         // Получить отношение векторов: параллельны, перпендикулярны, остальное
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            if (Math.Abs(v.CrossProduct(u)) == 0)
+            {
+                return VectorRelation.Parallel;
+            }
+            else if (Math.Abs(v.DotProduct(u)) == 0)
+            {
+                return VectorRelation.Orthogonal;
+            }
+            return VectorRelation.General;
         }
 
         // Еденичный ортогональный вектор данному
         public static Vector GetOrthogonal(this Vector v)
         {
-            throw new NotImplementedException();
+            return new Vector(-v.y, v.x) / v.Length();
         }
 
-        // Повернуть вектор на заданный угол
+        /// <summary>
+        /// Rotates vector v by angle
+        /// </summary>
+        /// <param name="v">Vector v</param>
+        /// <param name="angle">Angle in radians</param>
+        /// <returns></returns>
         public static Vector Rotate(this Vector v, double angle)
         {
-            throw new NotImplementedException();
+            double cos = Math.Cos(angle);
+            double sin = Math.Sin(angle);
+            return new Vector(v.x * cos - v.y * sin, v.x * sin + v.y * cos);
         }
     }
 }
