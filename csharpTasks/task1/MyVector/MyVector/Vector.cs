@@ -25,47 +25,88 @@ namespace MyVector
 
         }        
         */
+        public Vector(double x, double y)
+        {
+            _x = x;
+            _y = y;
+        }
+
         public double Length()
         {
-            throw new NotImplementedException();
+            return Math.Sqrt(_x * _x + _y * _y);
         }
 
         public Vector Add(Vector v)
         {
-            throw new NotImplementedException();
+            return new Vector(_x + v._x, _y + v._y);
         }
 
         public Vector Scale(double k)
         {
-            throw new NotImplementedException();
+            return new Vector(_x * k, _y * k);
         }
 
         public double DotProduct(Vector v)
         {
-            throw new NotImplementedException();
+            return _x * v._x + _y * v._y;
         }
 
         public double CrossProduct(Vector v)
         {
-            throw new NotImplementedException();
+            return _x * v._y - _y * v._x;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"({_x}; {_y})";
         }
 
         #region Operators        
+
         /* В этой секции нужно реализовать следующие опрераторы 
         - v + u, v - u (v,u - Vector)
         - v*k, k*v, v/k (k - double)
         - +v, -v 
         */
         // Такая семантика у операторов в C#
-        public static Vector operator+ (Vector v, Vector u)
+        public static Vector operator +(Vector v, Vector u)
         {
-            throw new NotImplementedException();
-        }        
+            return new Vector(v._x + u._x, v._y + u._y);
+        }
+
+        public static Vector operator -(Vector v, Vector u)
+        {
+            return new Vector(v._x - u._x, v._y - v._y);
+        }
+
+        public static Vector operator *(Vector v, double k)
+        {
+            return new Vector(v._x * k, v._y * k);
+        }
+
+        public static Vector operator *(double k, Vector v)
+        {
+            return new Vector(v._x * k, v._y * k);
+        }
+
+        public static Vector operator /(Vector v, double k)
+        {
+            return new Vector(v._x / k, v._y / k);
+        }
+
+        public static Vector operator +(Vector v)
+        {
+            return v;
+        }
+
+        public static Vector operator -(Vector v)
+        {
+            return new Vector(-v._x, -v._y);
+        }
+
         #endregion
+
+        private readonly double _x;
+        private readonly double _y;
     }
 }
