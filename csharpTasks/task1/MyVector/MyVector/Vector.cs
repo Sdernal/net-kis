@@ -26,8 +26,8 @@ namespace MyVector
         }        
         */
 
-        public double x;
-        public double y;
+        public double x { get; private set; }
+        public double y { get; private set; }
 
         /// <summary>
         /// Creates Vector object with x- and y-coordinates.
