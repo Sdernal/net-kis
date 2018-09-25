@@ -27,38 +27,38 @@ namespace MyVector
         */
         public Vector(double x, double y)
         {
-            _x = x;
-            _y = y;
+            X = x;
+            Y = y;
         }
 
         public double Length()
         {
-            return Math.Sqrt(_x * _x + _y * _y);
+            return Math.Sqrt(X * X + Y * Y);
         }
 
         public Vector Add(Vector v)
         {
-            return new Vector(_x + v._x, _y + v._y);
+            return new Vector(X + v.X, Y + v.Y);
         }
 
         public Vector Scale(double k)
         {
-            return new Vector(_x * k, _y * k);
+            return new Vector(X * k, Y * k);
         }
 
         public double DotProduct(Vector v)
         {
-            return _x * v._x + _y * v._y;
+            return X * v.X + Y * v.Y;
         }
 
         public double CrossProduct(Vector v)
         {
-            return _x * v._y - _y * v._x;
+            return X * v.Y - Y * v.X;
         }
 
         public override string ToString()
         {
-            return $"({_x}; {_y})";
+            return $"({X}; {Y})";
         }
 
         #region Operators        
@@ -71,27 +71,27 @@ namespace MyVector
         // Такая семантика у операторов в C#
         public static Vector operator +(Vector v, Vector u)
         {
-            return new Vector(v._x + u._x, v._y + u._y);
+            return new Vector(v.X + u.X, v.Y + u.Y);
         }
 
         public static Vector operator -(Vector v, Vector u)
         {
-            return new Vector(v._x - u._x, v._y - v._y);
+            return new Vector(v.X - u.X, v.Y - v.Y);
         }
 
         public static Vector operator *(Vector v, double k)
         {
-            return new Vector(v._x * k, v._y * k);
+            return new Vector(v.X * k, v.Y * k);
         }
 
         public static Vector operator *(double k, Vector v)
         {
-            return new Vector(v._x * k, v._y * k);
+            return new Vector(v.X * k, v.Y * k);
         }
 
         public static Vector operator /(Vector v, double k)
         {
-            return new Vector(v._x / k, v._y / k);
+            return new Vector(v.X / k, v.Y / k);
         }
 
         public static Vector operator +(Vector v)
@@ -101,12 +101,12 @@ namespace MyVector
 
         public static Vector operator -(Vector v)
         {
-            return new Vector(-v._x, -v._y);
+            return new Vector(-v.X, -v.Y);
         }
 
         #endregion
 
-        private readonly double _x;
-        private readonly double _y;
+        public readonly double X;
+        public readonly double Y;
     }
 }

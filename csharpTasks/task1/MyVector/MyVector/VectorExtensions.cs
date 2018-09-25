@@ -22,31 +22,39 @@ namespace MyVector
         // Нормализовать вектор
         public static Vector Normalize(this Vector v)
         {
-            throw new NotImplementedException();
+            return v / v.Length();
         }
 
         // Получить угол между векторами в радианах
         public static double GetAngleBetween(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            return Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
         }
 
         // Получить отношение векторов: параллельны, перпендикулярны, остальное
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            if (Math.Abs(v.CrossProduct(u)) < 1e-4) // TODO: think about it
+            {
+                return VectorRelation.Parallel;
+            }
+
+            return Math.Abs(v.DotProduct(u)) < 1e-4 // TODO: and here
+                ? VectorRelation.Orthogonal
+                : VectorRelation.General;
         }
 
         // Еденичный ортогональный вектор данному
         public static Vector GetOrthogonal(this Vector v)
         {
-            throw new NotImplementedException();
+            return new Vector(v.Y, -v.X).Normalize();
         }
 
         // Повернуть вектор на заданный угол
         public static Vector Rotate(this Vector v, double angle)
         {
-            throw new NotImplementedException();
+            return new Vector(v.X * Math.Cos(angle) - v.Y * Math.Sin(angle),
+                v.X * Math.Sin(angle) + v.Y * Math.Cos(angle));
         }
     }
 }
