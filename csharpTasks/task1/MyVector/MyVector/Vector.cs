@@ -25,41 +25,47 @@ namespace MyVector
 
         }        
         */
+        /// <summary>
+        /// Конструирует вектор по его координатам
+        /// </summary>
+        /// <param name="x">Координата по оси абцисс</param>
+        /// <param name="y">Координата по оси ординат</param>
         public Vector(double x, double y)
         {
             X = x;
             Y = y;
         }
 
-        public double Length()
-        {
-            return Math.Sqrt(X * X + Y * Y);
-        }
+        /// <summary>
+        /// Вычисляет длину вектора
+        /// </summary>
+        /// <returns>Длина вектора</returns>
+        public double Length() => Math.Sqrt(X * X + Y * Y);
 
-        public Vector Add(Vector v)
-        {
-            return new Vector(X + v.X, Y + v.Y);
-        }
+        /// <summary>
+        /// Складывает два вектора
+        /// </summary>
+        /// <param name="v">Вектор, который нужно сложить с данным</param>
+        /// <returns>Вектор-сумма данного вектора и вектора v</returns>
+        public Vector Add(Vector v) => new Vector(X + v.X, Y + v.Y);
 
-        public Vector Scale(double k)
-        {
-            return new Vector(X * k, Y * k);
-        }
+        /// <summary>
+        /// Умножение вектора на скаляр
+        /// </summary>
+        /// <param name="k">Число, на которое умножается вектор</param>
+        /// <returns>Вектор - произведение данного на число k</returns>
+        public Vector Scale(double k) => new Vector(X * k, Y * k);
 
-        public double DotProduct(Vector v)
-        {
-            return X * v.X + Y * v.Y;
-        }
+        /// <summary>
+        /// Скалярное произведение векторов
+        /// </summary>
+        /// <param name="v">Вектор, на который данный умножается скалярно</param>
+        /// <returns>Скалярное призведение данного вектора на вектор v</returns>
+        public double DotProduct(Vector v) => X * v.X + Y * v.Y;
 
-        public double CrossProduct(Vector v)
-        {
-            return X * v.Y - Y * v.X;
-        }
+        public double CrossProduct(Vector v) => X * v.Y - Y * v.X;
 
-        public override string ToString()
-        {
-            return $"({X}; {Y})";
-        }
+        public override string ToString() => $"({X}; {Y})";
 
         #region Operators        
 
@@ -69,44 +75,28 @@ namespace MyVector
         - +v, -v 
         */
         // Такая семантика у операторов в C#
-        public static Vector operator +(Vector v, Vector u)
-        {
-            return new Vector(v.X + u.X, v.Y + u.Y);
-        }
+        public static Vector operator +(Vector v, Vector u) =>
+            new Vector(v.X + u.X, v.Y + u.Y);
 
-        public static Vector operator -(Vector v, Vector u)
-        {
-            return new Vector(v.X - u.X, v.Y - v.Y);
-        }
+        public static Vector operator -(Vector v, Vector u) =>
+            new Vector(v.X - u.X, v.Y - v.Y);
 
-        public static Vector operator *(Vector v, double k)
-        {
-            return new Vector(v.X * k, v.Y * k);
-        }
+        public static Vector operator *(Vector v, double k) =>
+            new Vector(v.X * k, v.Y * k);
 
-        public static Vector operator *(double k, Vector v)
-        {
-            return new Vector(v.X * k, v.Y * k);
-        }
+        public static Vector operator *(double k, Vector v) =>
+            new Vector(v.X * k, v.Y * k);
 
-        public static Vector operator /(Vector v, double k)
-        {
-            return new Vector(v.X / k, v.Y / k);
-        }
+        public static Vector operator /(Vector v, double k) =>
+            new Vector(v.X / k, v.Y / k);
 
-        public static Vector operator +(Vector v)
-        {
-            return v;
-        }
+        public static Vector operator +(Vector v) => v;
 
-        public static Vector operator -(Vector v)
-        {
-            return new Vector(-v.X, -v.Y);
-        }
+        public static Vector operator -(Vector v) => new Vector(-v.X, -v.Y);
 
         #endregion
 
-        public readonly double X;
-        public readonly double Y;
+        public double X;
+        public double Y;
     }
 }

@@ -20,16 +20,11 @@ namespace MyVector
     public static class VectorExtensions
     {
         // Нормализовать вектор
-        public static Vector Normalize(this Vector v)
-        {
-            return v / v.Length();
-        }
+        public static Vector Normalize(this Vector v) => v / v.Length();
 
         // Получить угол между векторами в радианах
-        public static double GetAngleBetween(this Vector v, Vector u)
-        {
-            return Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
-        }
+        public static double GetAngleBetween(this Vector v, Vector u) =>
+            Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
 
         // Получить отношение векторов: параллельны, перпендикулярны, остальное
         public static VectorRelation GetRelation(this Vector v, Vector u)
@@ -45,16 +40,12 @@ namespace MyVector
         }
 
         // Еденичный ортогональный вектор данному
-        public static Vector GetOrthogonal(this Vector v)
-        {
-            return new Vector(v.Y, -v.X).Normalize();
-        }
+        public static Vector GetOrthogonal(this Vector v) =>
+            new Vector(v.Y, -v.X).Normalize();
 
         // Повернуть вектор на заданный угол
-        public static Vector Rotate(this Vector v, double angle)
-        {
-            return new Vector(v.X * Math.Cos(angle) - v.Y * Math.Sin(angle),
+        public static Vector Rotate(this Vector v, double angle) =>
+            new Vector(v.X * Math.Cos(angle) - v.Y * Math.Sin(angle),
                 v.X * Math.Sin(angle) + v.Y * Math.Cos(angle));
-        }
     }
 }
