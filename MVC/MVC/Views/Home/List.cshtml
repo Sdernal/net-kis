@@ -1,0 +1,26 @@
+﻿
+@{
+    // Здесь просто пишем код на C#
+    Layout = null; // Родительская разметка, позоляет ипользовать один шаблон на несколько представлений, расскажу потом
+
+    string[] cities = { "Moscow", "Berlin", "Paris", "London" };
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+    <h1>Cities</h1>
+    <table>
+        @foreach (string city in cities)
+        {
+            <tr><td>@city</td></tr>
+        }
+    </table>
+   
+</body>
+</html>

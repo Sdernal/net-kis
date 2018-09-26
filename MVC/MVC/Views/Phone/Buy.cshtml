@@ -1,0 +1,25 @@
+﻿@using MVC.Models
+@model Phone
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Buy</title>
+</head>
+<body>
+    <h1>You want to buy @Model.Name, please enter your name</h1>
+    @* Передача данных в метод POST *@
+    <form method="post">
+        <input type="hidden" value="@ViewBag.PhoneId" name= "PhoneId" />
+        <label>Name</label>
+        <input type="text" name="User"/>
+        <br />
+        <input type="submit" value="Submit" />
+    </form>
+</body>
+</html>
