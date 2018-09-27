@@ -59,7 +59,8 @@ namespace MyVector
             this.x += v.x;
             this.y += v.y;
 
-            return this;
+
+            return new Vector();
         }
 
         /// <summary>
