@@ -24,6 +24,7 @@ namespace MVC.Controllers
         }
         public IActionResult Index()
         {
+            // Использование модели
             return View(phones);
         }
 
@@ -32,9 +33,11 @@ namespace MVC.Controllers
             return $"{phones[id - 1].Name}";
         }
 
+        // Можно для метода с одним именем задавать различные типы запроса
         [HttpGet]
         public IActionResult Buy(int id)
         {
+            // Вызовется при переходе на ~/Home/Buy/id
             ViewBag.PhoneId = id;
             return View(phones[id-1]);
         }
@@ -42,6 +45,7 @@ namespace MVC.Controllers
         [HttpPost]
         public string Buy(int PhoneId, string User)
         {
+            // Вызовется при нажании на форме Submit
             return $"Thanks, {User}, for the order {PhoneId}";
         }
     }
