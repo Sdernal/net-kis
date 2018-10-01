@@ -9,6 +9,9 @@ namespace dotNetBasics
         {
             // Ну куда же без Hello world
             Console.WriteLine("Hello world!");
+            
+            Console.ReadKey();
+            return;
 
             #region Про числа
             // Разные численные типы имеют разные суффиксы:
