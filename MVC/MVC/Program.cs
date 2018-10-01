@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MVC
 {
+    // Класс Program оставляем без изменений
     public class Program
     {
         public static void Main(string[] args)
