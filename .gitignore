@@ -16,3 +16,6 @@
 /MVC/.vs
 /MVC/MVC/bin/Debug/netcoreapp2.0
 /MVC/MVC/obj
+/dotNetBasics/GenericsCollections/bin/Debug
+/dotNetBasics/GenericsCollections/obj/Debug
+/dotNetBasics/packages/System.ValueTuple.4.5.0
