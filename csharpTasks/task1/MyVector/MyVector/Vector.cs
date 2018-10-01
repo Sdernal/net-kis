@@ -56,11 +56,7 @@ namespace MyVector
         /// <returns>This Vector</returns>
         public Vector Add(Vector v)
         {
-            this.x += v.x;
-            this.y += v.y;
-
-
-            return new Vector();
+            return new Vector(this.x + v.x, this.y + v.y);
         }
 
         /// <summary>
@@ -70,10 +66,7 @@ namespace MyVector
         /// <returns>This Vector</returns>
         public Vector Scale(double k)
         {
-            this.x *= k;
-            this.y *= k;
-
-            return this;
+            return new Vector(this.x * k, this.y * k);
         }
 
         /// <summary>
