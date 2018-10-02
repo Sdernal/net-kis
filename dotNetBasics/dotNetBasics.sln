@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNetBasics", "dotNetBasic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Classes\Classes.csproj", "{81640932-EF0F-4826-9CB1-82BDC479707F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericsCollections", "GenericsCollections\GenericsCollections.csproj", "{26D92C0A-05D3-438B-B7D2-E752F48EFFFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{81640932-EF0F-4826-9CB1-82BDC479707F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81640932-EF0F-4826-9CB1-82BDC479707F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81640932-EF0F-4826-9CB1-82BDC479707F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26D92C0A-05D3-438B-B7D2-E752F48EFFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26D92C0A-05D3-438B-B7D2-E752F48EFFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26D92C0A-05D3-438B-B7D2-E752F48EFFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26D92C0A-05D3-438B-B7D2-E752F48EFFFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,24 @@
+﻿@using MVC.Models
+@model IEnumerable<Phone>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>Smartphones</h1>
+    <table>
+        <tr><th>Id</th><th>Name</th><th>Manufactorer</th><th></th></tr>
+        @foreach(Phone p in Model)
+        {
+            <tr><td>@p.Id</td><td>@p.Name</td><td>@p.Manufactorer</td><td><a href="~/Phone/Buy/@p.Id">Buy</a></td></tr>
+        }
+    </table>
+</body>
+</html>
