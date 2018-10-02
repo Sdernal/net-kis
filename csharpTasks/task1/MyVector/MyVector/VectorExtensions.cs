@@ -19,14 +19,36 @@ namespace MyVector
     // И не забыть про документацию и тесты
     public static class VectorExtensions
     {
-        // Нормализовать вектор
+        /// <summary>
+        /// Нормализация вектора
+        /// TODO: Length=0?
+        /// </summary>
+        /// <param name="v">Вектор</param>
+        /// <returns>Вектор длины 1, сонаправленный вектору v</returns>
         public static Vector Normalize(this Vector v) => v / v.Length();
 
-        // Получить угол между векторами в радианах
+        /// <summary>
+        /// Получить угол между векторами в радианах
+        /// TODO: Length=0?
+        /// </summary>
+        /// <param name="v">Первый вектор</param>
+        /// <param name="u">Второй вектор</param>
+        /// <returns>Угол между векторами v и u</returns>
         public static double GetAngleBetween(this Vector v, Vector u) =>
             Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
 
-        // Получить отношение векторов: параллельны, перпендикулярны, остальное
+        /// <summary>
+        /// Получить отношение векторов: параллельны, перпендикулярны, остальное
+        /// TODO: Length=0?
+        /// </summary>
+        /// <param name="v">Первый вектор</param>
+        /// <param name="u">Второй вектор</param>
+        /// <returns>
+        /// VectorRelation:
+        /// Parallel, если параллельны
+        /// Orthogonal, если перпендикулярны
+        /// General, иначе
+        /// </returns>
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
             if (Math.Abs(v.CrossProduct(u)) < 1e-4) // TODO: think about it
@@ -39,11 +61,28 @@ namespace MyVector
                 : VectorRelation.General;
         }
 
-        // Еденичный ортогональный вектор данному
+        /// <summary>
+        /// Еденичный вектор, ортогональный данному, полученный поворотом на 90
+        /// градусов против часовой стрелки
+        /// TODO: Length=0?
+        /// </summary>
+        /// <param name="v">Вектор</param>
+        /// <returns>
+        /// Единичный вектор, повёрнутый относительно v на 90 градусов
+        /// против часовой стрелки
+        /// </returns>
         public static Vector GetOrthogonal(this Vector v) =>
-            new Vector(v.Y, -v.X).Normalize();
+            new Vector(-v.Y, v.X).Normalize();
 
-        // Повернуть вектор на заданный угол
+        /// <summary>
+        /// Повернуть вектор на заданный угол
+        /// </summary>
+        /// <param name="v">Вектор</param>
+        /// <param name="angle">
+        /// Величина угла в радианах, на который осуществляется поворот
+        /// против часовой стрелки
+        /// </param>
+        /// <returns>Результат поворота вектора v на угол angle</returns>
         public static Vector Rotate(this Vector v, double angle) =>
             new Vector(v.X * Math.Cos(angle) - v.Y * Math.Sin(angle),
                 v.X * Math.Sin(angle) + v.Y * Math.Cos(angle));
