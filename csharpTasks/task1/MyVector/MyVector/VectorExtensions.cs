@@ -17,11 +17,23 @@ namespace MyVector
     {
         /// <summary>
         /// Нормализация вектора
-        /// TODO: Length=0?
         /// </summary>
         /// <param name="v">Вектор</param>
-        /// <returns>Вектор длины 1, сонаправленный вектору v</returns>
-        public static Vector Normalize(this Vector v) => v / v.Length();
+        /// <returns>
+        /// Вектор длины 1, сонаправленный вектору v.
+        /// Если длина v меньше 1e-9, то v считается нулевым - выбрасывается
+        /// исключение DivideByZeroException
+        /// </returns>
+        public static Vector Normalize(this Vector v)
+        {
+            var l = v.Length();
+            if (l < 1e-9)
+            {
+                throw new DivideByZeroException("Zero sized Vector");
+            }
+
+            return v / l;
+        }
 
         /// <summary>
         /// Получить угол между векторами в радианах

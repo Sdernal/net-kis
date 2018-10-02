@@ -73,7 +73,7 @@ namespace MyVector
             x = new Vector(7, 4);
             y = new Vector(0, 0);
             Console.WriteLine($"[{x}; {y}] = {x.CrossProduct(y)}");
-            
+
             Console.WriteLine();
 
             #endregion
@@ -90,7 +90,7 @@ namespace MyVector
             x = new Vector(4, 9);
             y = new Vector(5, -1);
             Console.WriteLine($"{x} + {y} = {x + y}");
-            
+
             Console.WriteLine();
 
             #endregion
@@ -108,19 +108,19 @@ namespace MyVector
             x = new Vector(-7, 3);
             Console.WriteLine($"{x} * {k} = {x * k}");
             Console.WriteLine($"{k} * {x} = {k * x}");
-            
+
             Console.WriteLine();
 
             #endregion
-            
+
             #region operatorSlash
 
             k = 3;
             Console.WriteLine($"{x} / {k} = {x / k}");
-            
+
             k = 0;
             Console.WriteLine($"{x} / {k} = {x / k}");
-            
+
             Console.WriteLine();
 
             #endregion
@@ -135,6 +135,33 @@ namespace MyVector
             #region operatorUnaryMinus
 
             Console.WriteLine($"-{x} = {-x}");
+            Console.WriteLine();
+
+            #endregion
+
+            #region Normalize
+
+            x = new Vector(3, 0);
+            Console.WriteLine($"{x} normalized: {x.Normalize()}");
+
+            x = new Vector(-3, 4);
+            Console.WriteLine($"{x} normalized: {x.Normalize()}");
+
+            x = new Vector(-0.5, -0.5);
+            Console.WriteLine($"{x} normalized: {x.Normalize()}");
+
+            try
+            {
+                x = new Vector(0, 0);
+                y = x.Normalize();
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine($"{x} normalization...");
+                Console.WriteLine("DivideByZeroException has been caught. " +
+                                  $"Message: {e}");
+            }
+
             Console.WriteLine();
 
             #endregion
