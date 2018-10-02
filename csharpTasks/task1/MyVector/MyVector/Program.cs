@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyVector
 {
@@ -77,6 +73,14 @@ namespace MyVector
             x = new Vector(7, 4);
             y = new Vector(0, 0);
             Console.WriteLine($"[{x}; {y}] = {x.CrossProduct(y)}");
+            
+            Console.WriteLine();
+
+            #endregion
+
+            #region ToString
+
+            Console.WriteLine(x.ToString());
 
             #endregion
         }
