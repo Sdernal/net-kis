@@ -64,7 +64,6 @@ namespace MyVector
 
         /// <summary>
         /// Получить отношение векторов: параллельны, перпендикулярны, остальное
-        /// TODO: Length=0?
         /// </summary>
         /// <param name="v">Первый вектор</param>
         /// <param name="u">Второй вектор</param>
@@ -73,15 +72,18 @@ namespace MyVector
         /// Parallel, если параллельны
         /// Orthogonal, если перпендикулярны
         /// General, иначе
+        /// В случае нулевого вектора выбрасывается исключение DivisionByZeroException
         /// </returns>
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
-            if (Math.Abs(v.CrossProduct(u)) < 1e-4) // TODO: think about it
+            var a = v.Normalize();
+            var b = u.Normalize();
+            if (Math.Abs(a.CrossProduct(b)) < 1e-9)
             {
                 return VectorRelation.Parallel;
             }
 
-            return Math.Abs(v.DotProduct(u)) < 1e-4 // TODO: and here
+            return Math.Abs(a.DotProduct(b)) < 1e-9
                 ? VectorRelation.Orthogonal
                 : VectorRelation.General;
         }
