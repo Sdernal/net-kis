@@ -101,6 +101,29 @@ namespace MyVector
             Console.WriteLine();
 
             #endregion
+
+            #region operatorStar
+
+            k = 2.5;
+            x = new Vector(-7, 3);
+            Console.WriteLine($"{x} * {k} = {x * k}");
+            Console.WriteLine($"{k} * {x} = {k * x}");
+            
+            Console.WriteLine();
+
+            #endregion
+            
+            #region operatorSlash
+
+            k = 3;
+            Console.WriteLine($"{x} / {k} = {x / k}");
+            
+            k = 0;
+            Console.WriteLine($"{x} / {k} = {x / k}");
+            
+            Console.WriteLine();
+
+            #endregion
         }
     }
 }

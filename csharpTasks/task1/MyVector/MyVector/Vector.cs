@@ -119,11 +119,14 @@ namespace MyVector
 
         /// <summary>
         /// Деление вектора на число
-        /// TODO: k=0?
         /// </summary>
         /// <param name="v">Вектор</param>
         /// <param name="k">Число</param>
-        /// <returns>Результат деления вектора на число</returns>
+        /// <returns>
+        /// Результат деления вектора на число.
+        /// При делении на число около нуля компоненты результирующего вектора
+        /// могут стать бесконечными
+        /// </returns>
         public static Vector operator /(Vector v, double k) =>
             new Vector(v.X / k, v.Y / k);
 
