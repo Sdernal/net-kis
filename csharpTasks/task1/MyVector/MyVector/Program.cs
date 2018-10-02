@@ -124,6 +124,20 @@ namespace MyVector
             Console.WriteLine();
 
             #endregion
+
+            #region operatorUnaryPlus
+
+            Console.WriteLine($"+{x} = {+x}");
+            Console.WriteLine();
+
+            #endregion
+
+            #region operatorUnaryMinus
+
+            Console.WriteLine($"-{x} = {-x}");
+            Console.WriteLine();
+
+            #endregion
         }
     }
 }
