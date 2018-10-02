@@ -81,6 +81,24 @@ namespace MyVector
             #region ToString
 
             Console.WriteLine(x.ToString());
+            Console.WriteLine();
+
+            #endregion
+
+            #region operatorPlus
+
+            x = new Vector(4, 9);
+            y = new Vector(5, -1);
+            Console.WriteLine($"{x} + {y} = {x + y}");
+            
+            Console.WriteLine();
+
+            #endregion
+
+            #region operatorMinus
+
+            Console.WriteLine($"{x} - {y} = {x - y}");
+            Console.WriteLine();
 
             #endregion
         }

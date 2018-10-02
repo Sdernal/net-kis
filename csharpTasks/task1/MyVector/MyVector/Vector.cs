@@ -97,7 +97,7 @@ namespace MyVector
         /// <param name="u">Вычитаемое</param>
         /// <returns>Разность векторв v и u</returns>
         public static Vector operator -(Vector v, Vector u) =>
-            new Vector(v.X - u.X, v.Y - v.Y);
+            new Vector(v.X - u.X, v.Y - u.Y);
 
         /// <summary>
         /// Домножение вектора на скаляр (число)
