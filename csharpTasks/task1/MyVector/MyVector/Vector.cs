@@ -63,8 +63,17 @@ namespace MyVector
         /// <returns>Скалярное призведение данного вектора на вектор v</returns>
         public double DotProduct(Vector v) => X * v.X + Y * v.Y;
 
+        /// <summary>
+        /// Плоское "векторное" произведение векторов
+        /// </summary>
+        /// <param name="v">Вектор, на который данный умножается векторно</param>
+        /// <returns>Векторное призведение данного вектора на вектор v</returns>
         public double CrossProduct(Vector v) => X * v.Y - Y * v.X;
 
+        /// <summary>
+        /// Строковое представление в форме (X; Y)
+        /// </summary>
+        /// <returns>Строковое представление</returns>
         public override string ToString() => $"({X}; {Y})";
 
         #region Operators        
@@ -75,23 +84,65 @@ namespace MyVector
         - +v, -v 
         */
         // Такая семантика у операторов в C#
+
+        /// <summary>
+        /// Сумма векторов
+        /// </summary>
+        /// <param name="v">Первое слагаемое</param>
+        /// <param name="u">Второе слагаемое</param>
+        /// <returns>Сумма векторов v и u</returns>
         public static Vector operator +(Vector v, Vector u) =>
             new Vector(v.X + u.X, v.Y + u.Y);
 
+        /// <summary>
+        /// Разность векторов
+        /// </summary>
+        /// <param name="v">Уменьшаемое</param>
+        /// <param name="u">Вычитаемое</param>
+        /// <returns>Разность векторв v и u</returns>
         public static Vector operator -(Vector v, Vector u) =>
             new Vector(v.X - u.X, v.Y - v.Y);
 
+        /// <summary>
+        /// Домножение вектора на скаляр (число)
+        /// </summary>
+        /// <param name="v">Вектор</param>
+        /// <param name="k">Скаляр</param>
+        /// <returns>Произведение вектора на скаляр</returns>
         public static Vector operator *(Vector v, double k) =>
             new Vector(v.X * k, v.Y * k);
 
+        /// <summary>
+        /// Домножение вектора на скаляр (число)
+        /// </summary>
+        /// <param name="k">Скаляр</param>
+        /// <param name="v">Вектор</param>
+        /// <returns>Произведение вектора на скаляр</returns>
         public static Vector operator *(double k, Vector v) =>
             new Vector(v.X * k, v.Y * k);
 
+        /// <summary>
+        /// Деление вектора на число
+        /// TODO: k=0?
+        /// </summary>
+        /// <param name="v">Вектор</param>
+        /// <param name="k">Число</param>
+        /// <returns>Результат деления вектора на число</returns>
         public static Vector operator /(Vector v, double k) =>
             new Vector(v.X / k, v.Y / k);
 
+        /// <summary>
+        /// Ничего не делает: возвращает тот же вектор, что и на входе
+        /// </summary>
+        /// <param name="v">Вектор</param>
+        /// <returns>Тот же самый вектор v</returns>
         public static Vector operator +(Vector v) => v;
 
+        /// <summary>
+        /// Возвращает противоположный вектор
+        /// </summary>
+        /// <param name="v">Вектор</param>
+        /// <returns>Вектор, противоположный вектору v</returns>
         public static Vector operator -(Vector v) => new Vector(-v.X, -v.Y);
 
         #endregion
