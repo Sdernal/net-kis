@@ -37,13 +37,30 @@ namespace MyVector
 
         /// <summary>
         /// Получить угол между векторами в радианах
-        /// TODO: Length=0?
         /// </summary>
         /// <param name="v">Первый вектор</param>
         /// <param name="u">Второй вектор</param>
-        /// <returns>Угол между векторами v и u</returns>
-        public static double GetAngleBetween(this Vector v, Vector u) =>
-            Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
+        /// <returns>
+        /// Угол между векторами v и u.
+        /// Если один из векторов v и u нулевой (длина меньше 1e-9),
+        /// то угол не определён - выбрасывается DivisionByZeroException
+        /// </returns>
+        public static double GetAngleBetween(this Vector v, Vector u)
+        {
+            var a = v.Normalize();
+            var b = u.Normalize();
+            var p = a.DotProduct(b);
+            if (p > 1)
+            {
+                p = 1;
+            }
+            else if (p < -1)
+            {
+                p = -1;
+            }
+
+            return Math.Acos(p);
+        }
 
         /// <summary>
         /// Получить отношение векторов: параллельны, перпендикулярны, остальное

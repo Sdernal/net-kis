@@ -165,6 +165,35 @@ namespace MyVector
             Console.WriteLine();
 
             #endregion
+
+            #region GetAngleBetween
+
+            x = new Vector(3e5, 1);
+            y = new Vector(-3e5, -1);
+            Console.WriteLine($"angle({x}, {y}) = {x.GetAngleBetween(y)}");
+            Console.WriteLine($"angle({y}, {x}) = {y.GetAngleBetween(x)}");
+            Console.WriteLine($"angle({x}, {x}) = {x.GetAngleBetween(x)}");
+
+            x = new Vector(4, -7);
+            y = new Vector(-7.5, -5);
+            Console.WriteLine($"angle({x}, {y}) = {x.GetAngleBetween(y)}");
+            Console.WriteLine($"angle({y}, {x}) = {y.GetAngleBetween(x)}");
+
+            y = new Vector(0, 0);
+            try
+            {
+                Console.WriteLine($"angle({y}, {x}) = {y.GetAngleBetween(x)}");
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine($"angle({y}, {x}) = ...");
+                Console.WriteLine("DivisionByZero has been caught. " +
+                                  $"Message: {e}");
+            }
+
+            Console.WriteLine();
+
+            #endregion
         }
     }
 }
