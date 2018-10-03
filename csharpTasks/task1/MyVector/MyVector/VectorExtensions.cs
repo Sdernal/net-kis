@@ -72,12 +72,21 @@ namespace MyVector
         /// Parallel, если параллельны
         /// Orthogonal, если перпендикулярны
         /// General, иначе
-        /// В случае нулевого вектора выбрасывается исключение DivisionByZeroException
+        /// Нулевой вектор считается параллельным любому другому
         /// </returns>
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
-            var a = v.Normalize();
-            var b = u.Normalize();
+            Vector a, b;
+            try
+            {
+                a = v.Normalize();
+                b = u.Normalize();
+            }
+            catch (DivideByZeroException)
+            {
+                return VectorRelation.Parallel;
+            }
+
             if (Math.Abs(a.CrossProduct(b)) < 1e-9)
             {
                 return VectorRelation.Parallel;

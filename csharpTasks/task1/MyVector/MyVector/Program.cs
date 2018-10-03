@@ -194,6 +194,25 @@ namespace MyVector
             Console.WriteLine();
 
             #endregion
+
+            #region VectorRelation
+
+            x = new Vector(3, 5);
+            y = x * -4.5;
+            Console.WriteLine($"{x} and {y} are {x.GetRelation(y)}");
+
+            y = x.GetOrthogonal() * 0.3;
+            Console.WriteLine($"{x} and {y} are {x.GetRelation(y)}");
+
+            y = new Vector(0, 0);
+            Console.WriteLine($"{x} and {y} are {x.GetRelation(y)}");
+
+            y = new Vector(4, 8);
+            Console.WriteLine($"{x} and {y} are {x.GetRelation(y)}");
+
+            Console.WriteLine();
+
+            #endregion
         }
     }
 }
