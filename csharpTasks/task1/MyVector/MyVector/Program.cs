@@ -213,6 +213,37 @@ namespace MyVector
             Console.WriteLine();
 
             #endregion
+
+            #region GetOrthogonal
+
+            Console.WriteLine($"Orthogonal to {x} is {x.GetOrthogonal()}");
+
+            x = new Vector(0, 0);
+            try
+            {
+                Console.WriteLine($"Orthogonal to {x} is {x.GetOrthogonal()}");
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine($"Orthogonal to {x} is...");
+                Console.WriteLine("DivisionByZero has been caught. " +
+                                  $"Message: {e}");
+            }
+
+            Console.WriteLine();
+
+            #endregion
+
+            #region Rotate
+
+            x = new Vector(1, 0);
+            k = Math.PI / 2;
+            Console.WriteLine($"{x} rotated in {k} radians is {x.Rotate(k)}");
+
+            k = Math.PI / 6;
+            Console.WriteLine($"{x} rotated in {k} radians is {x.Rotate(k)}");
+
+            #endregion
         }
     }
 }

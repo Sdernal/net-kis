@@ -43,7 +43,7 @@ namespace MyVector
         /// <returns>
         /// Угол между векторами v и u.
         /// Если один из векторов v и u нулевой (длина меньше 1e-9),
-        /// то угол не определён - выбрасывается DivisionByZeroException
+        /// то угол не определён - выбрасывается DivideByZeroException
         /// </returns>
         public static double GetAngleBetween(this Vector v, Vector u)
         {
@@ -100,12 +100,12 @@ namespace MyVector
         /// <summary>
         /// Еденичный вектор, ортогональный данному, полученный поворотом на 90
         /// градусов против часовой стрелки
-        /// TODO: Length=0?
         /// </summary>
         /// <param name="v">Вектор</param>
         /// <returns>
         /// Единичный вектор, повёрнутый относительно v на 90 градусов
-        /// против часовой стрелки
+        /// против часовой стрелки. Для нулевого вектора выбрасывается
+        /// DivideByZeroException
         /// </returns>
         public static Vector GetOrthogonal(this Vector v) =>
             new Vector(-v.Y, v.X).Normalize();
@@ -116,7 +116,8 @@ namespace MyVector
         /// <param name="v">Вектор</param>
         /// <param name="angle">
         /// Величина угла в радианах, на который осуществляется поворот
-        /// против часовой стрелки
+        /// против часовой стрелки. Результат поворота нулевого вектора -
+        /// нулевой вектор
         /// </param>
         /// <returns>Результат поворота вектора v на угол angle</returns>
         public static Vector Rotate(this Vector v, double angle) =>
