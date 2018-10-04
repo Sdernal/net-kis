@@ -243,6 +243,34 @@ namespace MyVector
             k = Math.PI / 6;
             Console.WriteLine($"{x} rotated in {k} radians is {x.Rotate(k)}");
 
+            Console.WriteLine();
+
+            #endregion
+
+            #region NaN
+
+            try
+            {
+                x = new Vector(double.NaN, 5);
+                Console.WriteLine($"{x}");
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine("Argument exception has been caught. " +
+                                  $"Message: {e}");
+            }
+
+            try
+            {
+                x = new Vector(3, double.NaN);
+                Console.WriteLine($"{x}");
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine("Argument exception has been caught. " +
+                                  $"Message: {e}");
+            }
+
             #endregion
         }
     }

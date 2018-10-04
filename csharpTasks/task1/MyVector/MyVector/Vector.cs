@@ -28,6 +28,11 @@ namespace MyVector
         /// <param name="y">Координата по оси ординат</param>
         public Vector(double x, double y)
         {
+            if (double.IsNaN(x) || double.IsNaN(y))
+            {
+                throw new ArgumentException("Coordinates can\'t be NaN");
+            }
+
             X = x;
             Y = y;
         }
@@ -146,7 +151,7 @@ namespace MyVector
 
         #endregion
 
-        public double X { get; set; }
-        public double Y { get; set; }
+        public double X { get; }
+        public double Y { get; }
     }
 }
