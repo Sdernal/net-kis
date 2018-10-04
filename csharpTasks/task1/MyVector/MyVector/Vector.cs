@@ -146,7 +146,7 @@ namespace MyVector
 
         #endregion
 
-        public double X;
-        public double Y;
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 }
