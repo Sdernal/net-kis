@@ -50,19 +50,19 @@ namespace MyVector
         public static double GetAngleBetween(this Vector v, Vector u,
             double eps = 1e-9)
         {
-            var a = v.Normalize(eps);
-            var b = u.Normalize(eps);
-            var p = a.DotProduct(b);
-            if (p > 1)
+            var vNormalized = v.Normalize(eps);
+            var uNormalized = u.Normalize(eps);
+            var dotProduct = vNormalized.DotProduct(uNormalized);
+            if (dotProduct > 1)
             {
-                p = 1;
+                dotProduct = 1;
             }
-            else if (p < -1)
+            else if (dotProduct < -1)
             {
-                p = -1;
+                dotProduct = -1;
             }
 
-            return Math.Acos(p);
+            return Math.Acos(dotProduct);
         }
 
         /// <summary>
