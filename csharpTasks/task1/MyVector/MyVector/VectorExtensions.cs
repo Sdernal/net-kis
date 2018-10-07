@@ -13,40 +13,85 @@ namespace MyVector
         Orthogonal
     }
 
-    // Для создания методов расширения нужен статический класс, в котором в статических методах у первого аргумента 
-    // добавляется ключевое слово this, далее можно вызывать данный метод у объектов класса такого аргумента 
-    // Ниже нужно реализовать методы-расширения для нашего вектора
-    // И не забыть про документацию и тесты
     public static class VectorExtensions
     {
-        // Нормализовать вектор
+        /// <summary>
+        /// Нормализует вектор
+        /// </summary>
+        /// <param name="v">Двумерный вектор</param>
+        /// <returns>Вектор - результат нормализации данного вектора</returns>
+        /// <exception cref="ArgumentException">Выбрасывается при вызове для нулевого вектора, так как его нормализация невозможна</exception>
         public static Vector Normalize(this Vector v)
         {
-            throw new NotImplementedException();
+            if (v.Length() == 0)
+            {
+                throw new ArgumentException();
+            }
+            
+            return v / v.Length();
         }
 
-        // Получить угол между векторами в радианах
+        /// <summary>
+        /// Рассчитывает угол между векторами
+        /// </summary>
+        /// <param name="v">Двумерный вектор</param>
+        /// <param name="u">Двумерный вектор</param>
+        /// <returns>Число - угол между векторами в радианах</returns>
         public static double GetAngleBetween(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            if (v.Length() == 0 || u.Length() == 0)
+            {
+                return 0;
+            }
+            
+            return Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
         }
 
-        // Получить отношение векторов: параллельны, перпендикулярны, остальное
+        /// <summary>
+        /// Определяет отношение между векторами
+        /// </summary>
+        /// <param name="v">Двумерный вектор</param>
+        /// <param name="u">Двумерный вектор</param>
+        /// <returns>VectorRelation - отношение между векторами</returns>
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            if (v.DotProduct(u) == 0)
+            {
+                return VectorRelation.Orthogonal;
+            }
+            
+            if (v.CrossProduct(u) == 0)
+            {
+                return VectorRelation.Parallel;
+            }
+
+            return VectorRelation.General;
         }
 
-        // Еденичный ортогональный вектор данному
+        /// <summary>
+        /// Рассчитывает единичный вектор, ортогональный данному
+        /// </summary>
+        /// <param name="v">Двумерный вектор</param>
+        /// <returns>Единичный вектор, ортогональный данному</returns>
         public static Vector GetOrthogonal(this Vector v)
         {
-            throw new NotImplementedException();
+            if (v.Length() == 0)
+            {
+                return new Vector(1, 0);
+            }
+            
+            return new Vector(v.Y, -v.X) / v.Length();
         }
 
-        // Повернуть вектор на заданный угол
+        /// <summary>
+        /// Поворачивает вектор против часовой стрелки на заданный угол
+        /// </summary>
+        /// <param name="v">Двумерный вектор</param>
+        /// <param name="angle">Число - угол поворота в радианах</param>
+        /// <returns>Вектор - результат поворота данного вектора на заданный угол</returns>
         public static Vector Rotate(this Vector v, double angle)
         {
-            throw new NotImplementedException();
+            return new Vector(v.X * Math.Cos(angle) - v.Y * Math.Sin(angle), v.X * Math.Sin(angle) + v.Y * Math.Cos(angle));
         }
     }
 }
