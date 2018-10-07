@@ -29,7 +29,7 @@ namespace MyVector
         /// </summary>
         /// <param name="v">Вектор, про который мы хотим узнать ответ</param>
         /// <returns>True, если нулевой, false иначе</returns>
-        private static bool isZero(this Vector v)
+        public static bool isZero(this Vector v)
         {
             return Math.Abs(v.X) < EPS && Math.Abs(v.Y) < EPS;
         }
@@ -93,12 +93,11 @@ namespace MyVector
             return new Vector(-v.Y, v.X);
         }
 
-        // Повернуть вектор на заданный угол
         /// <summary>
         /// Поворот вектора на заданный угол
         /// </summary>
         /// <param name="v">Вектор, который надо повернуть</param>
-        /// <param name="angle">Угол, на который надо повернуть</param>
+        /// <param name="angle">Угол, на который надо повернуть. Положительный - по часовой стрелке, отрицательный - против</param>
         /// <returns>Вектор, который повернут на заданный угол от данного</returns>
         public static Vector Rotate(this Vector v, double angle)
         {
