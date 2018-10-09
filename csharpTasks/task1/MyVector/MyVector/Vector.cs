@@ -27,6 +27,16 @@ namespace MyVector
         */
 
         /// <summary>
+        /// Нулевой вектор
+        /// </summary>
+        public static Vector ZERO = new Vector(0, 0);
+
+        /// <summary>
+        /// Невалидный вектор
+        /// </summary>
+        public static Vector INVALID = new Vector(double.NaN, double.NaN);
+
+        /// <summary>
         /// Первая координата вектора
         /// </summary>
         public double X { get; set; }
@@ -165,6 +175,10 @@ namespace MyVector
         /// <returns>Результат деления вектора на число</returns>
         public static Vector operator /(Vector v, double k)
         {
+            if (k == 0)
+            {
+                return INVALID;
+            }
             return new Vector(v.X / k, v.Y / k);
         }
 

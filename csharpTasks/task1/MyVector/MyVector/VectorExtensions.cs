@@ -39,7 +39,7 @@ namespace MyVector
         public static Vector Normalize(this Vector v, double EPS = 1e-8)
         {
             var length = v.Length();
-            return (v.isZero(EPS) ? new Vector(0, 0) : v / length);
+            return (v.isZero(EPS) ? Vector.INVALID : v / length);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace MyVector
         {
             if (v.isZero(EPS) || u.isZero(EPS))
             {
-                return 0.0;
+                return double.NaN;
             }
             return Math.Acos(v.Normalize(EPS).DotProduct(u.Normalize(EPS)));
         }
@@ -90,7 +90,7 @@ namespace MyVector
             {
                 return new Vector(1, 0);
             }
-            return new Vector(-v.Y, v.X);
+            return new Vector(-v.Y, v.X).Normalize();
         }
 
         /// <summary>
