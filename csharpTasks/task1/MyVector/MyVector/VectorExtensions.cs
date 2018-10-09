@@ -20,16 +20,12 @@ namespace MyVector
     public static class VectorExtensions
     {
         /// <summary>
-        /// Константа для сравнения вещественных чисел
-        /// </summary>
-        private const double EPS = 1e-8;
-
-        /// <summary>
         /// Функция, проверающая вектор на нулевой
         /// </summary>
         /// <param name="v">Вектор, про который мы хотим узнать ответ</param>
+        /// <param name="EPS">Точность сравнения вещественных чисел</param>
         /// <returns>True, если нулевой, false иначе</returns>
-        public static bool isZero(this Vector v)
+        public static bool isZero(this Vector v, double EPS = 1e-8)
         {
             return Math.Abs(v.X) < EPS && Math.Abs(v.Y) < EPS;
         }
@@ -38,11 +34,12 @@ namespace MyVector
         /// Нормализация вектора
         /// </summary>
         /// <param name="v">Вектор, который необходимо нормализовать</param>
+        /// <param name="EPS">Точность сравнения вещественных чисел</param>
         /// <returns>Нормализованный вектор</returns>
-        public static Vector Normalize(this Vector v)
+        public static Vector Normalize(this Vector v, double EPS = 1e-8)
         {
             var length = v.Length();
-            return (v.isZero() ? v : v / length);
+            return (v.isZero(EPS) ? new Vector(0, 0) : v / length);
         }
 
         /// <summary>
@@ -50,14 +47,15 @@ namespace MyVector
         /// </summary>
         /// <param name="v">Первый вектор</param>
         /// <param name="u">Второй вектор</param>
+        /// <param name="EPS">Точность сравнения вещественных чисел</param>
         /// <returns>Угол в радианах между векторами</returns>
-        public static double GetAngleBetween(this Vector v, Vector u)
+        public static double GetAngleBetween(this Vector v, Vector u, double EPS = 1e-8)
         {
-            if (v.isZero() || u.isZero())
+            if (v.isZero(EPS) || u.isZero(EPS))
             {
                 return 0.0;
             }
-            return Math.Acos(v.Normalize().DotProduct(u.Normalize()));
+            return Math.Acos(v.Normalize(EPS).DotProduct(u.Normalize(EPS)));
         }
 
         /// <summary>
@@ -65,8 +63,9 @@ namespace MyVector
         /// </summary>
         /// <param name="v">Первый вектор</param>
         /// <param name="u">Второй вектор</param>
+        /// <param name="EPS">Точность сравнения вещественных чисел</param>
         /// <returns>Orthogonal, Parallel или General</returns>
-        public static VectorRelation GetRelation(this Vector v, Vector u)
+        public static VectorRelation GetRelation(this Vector v, Vector u, double EPS = 1e-8)
         {
             if (v.DotProduct(u) < EPS)
             {
@@ -78,15 +77,16 @@ namespace MyVector
             }
             return VectorRelation.General;
         }
-        
+
         /// <summary>
         /// Вычисление единичного вектора, который ортоганален данному
         /// </summary>
         /// <param name="v">Вектор</param>
+        /// <param name="EPS">Точность сравнения вещественных чисел</param>
         /// <returns>Единичный вектор ортоганальный заданному</returns>
-        public static Vector GetOrthogonal(this Vector v)
+        public static Vector GetOrthogonal(this Vector v, double EPS = 1e-8)
         {
-            if (v.isZero())
+            if (v.isZero(EPS))
             {
                 return new Vector(1, 0);
             }

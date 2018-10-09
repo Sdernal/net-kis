@@ -29,12 +29,12 @@ namespace MyVector
         /// <summary>
         /// Первая координата вектора
         /// </summary>
-        public double X;
+        public double X { get; set; }
 
         /// <summary>
         /// Вторая координата вектора
         /// </summary>
-        public double Y;
+        public double Y { get; set; }
 
         /// <summary>
         /// Конструктор для вектора

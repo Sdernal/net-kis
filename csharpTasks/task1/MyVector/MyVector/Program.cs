@@ -22,7 +22,14 @@ namespace MyVector
             Console.WriteLine(c.Rotate(Math.PI / 4));
             Console.WriteLine(a.GetAngleBetween(b));
             Console.WriteLine(c.isZero());
-            
+
+            Console.WriteLine("Test with Vector(0, 0)");
+            Vector zero = new Vector(0, 0);
+            Console.WriteLine(zero.GetOrthogonal().ToString());
+            Console.WriteLine(zero.Rotate(Math.PI).ToString());
+            Console.WriteLine(zero.GetAngleBetween(a));
+            Console.WriteLine(zero.Normalize().ToString());
+            Console.WriteLine(zero.isZero());
         }     
         
     }
