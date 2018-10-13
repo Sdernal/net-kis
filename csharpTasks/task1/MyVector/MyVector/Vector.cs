@@ -102,6 +102,13 @@ namespace MyVector
         - +v, -v 
         */
         // Такая семантика у операторов в C#
+
+        /// <summary>
+        /// Creates new (v + u) Vector
+        /// </summary>
+        /// <param name="v">Vector v</param>
+        /// <param name="u">Vector u</param>
+        /// <returns>Sum of v and u</returns>
         public static Vector operator+ (Vector v, Vector u)
         {
             return new Vector(v.x + u.x, v.y + u.y);
