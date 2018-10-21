@@ -11,7 +11,7 @@ namespace DummyCalculator.Tests
             int a = 5;
             int b = 6;
             Calculator calculator = new Calculator();
-            Assert.Equal(11, calculator.Sum(a, b));
+            Assert.Equal(11, calculator.Sum(a, b));            
         }
 
         [Theory]
