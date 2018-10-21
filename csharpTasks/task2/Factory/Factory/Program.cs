@@ -9,7 +9,7 @@ namespace Factory
     class Program
     {
         public static void Main(string[] args) {
-            Factory universalFactory = new Factory();
+            TransportFactory universalFactory = new TransportFactory();
             // Нужно уметь добавлять провайдеры
             universalFactory.AddProvider(new CarProvider());
             // С помощью которых создавать нужные объекты
@@ -17,7 +17,7 @@ namespace Factory
             car.Move(); // Просто выводит в консоль информацию о себе
 
             // Также можно задавать параметризованные провайдеры
-            TruckProvider truckProvider = new TruckProvider(600, "BELAZ");
+            TruckProvider truckProvider = new TruckProvider("BELAZ", 600);
             universalFactory.AddProvider(truckProvider);
             Truck truck = universalFactory.CreateTruck();
             truck.Move();
@@ -25,12 +25,15 @@ namespace Factory
             Car car1 = universalFactory.CreateTruck();
             car1?.Move();
             // Нужно уметь явно запрашивать провайдер
-            Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject();
+            //Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject(); - no idea(
+            Car car2 = (Car)universalFactory.GetProvider<TruckProvider>().CreateObject();
             car2?.Move();
-            
+
             // Насчет добавленных одинаковых провайдеров можно не беспокоиться, считаем, что один провайдер на тип
             // Можно явно проверять при добавлении или затирать старый
             // Также не помешает удаление провайдера для его последующей замены
+
+            Console.ReadKey();
         }
     }
 }

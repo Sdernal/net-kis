@@ -39,9 +39,9 @@
     <Compile Include="Data.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="IFactoryProvider.cs" />
+    <Compile Include="Providers.cs" />
     <Compile Include="IMovable.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Providers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
