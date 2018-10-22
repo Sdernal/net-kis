@@ -12,6 +12,14 @@ namespace Factory
 
     class TruckProvider : CarProvider // TODO: think about this inheritance
     {
+        public TruckProvider(int a, string b) // TODO: rename it
+        {
+            _a = a;
+            _b = b;
+        }
+
+        private int _a;
+        private string _b; // TODO: rename it
     }
 
     class PlaneProvider : IFactoryProvider
