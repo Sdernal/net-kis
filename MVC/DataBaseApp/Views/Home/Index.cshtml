@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Person>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Список пользователей</h1>
+
+<table class="table-condensed" >
+    <tr><th>Имя</th><th>Возраст</th></tr>
+    @foreach(var user in Model)
+    {
+        <tr><td>@user.Name</td><td>@user.Age</td></tr>
+    }
+</table>
+<a asp-controller="Home" asp-action="Create">Добавить пользователя</a>
