@@ -17,20 +17,22 @@ namespace Factory
             car.Move(); // Просто выводит в консоль информацию о себе
 
             // Также можно задавать параметризованные провайдеры
-            TruckProvider truckProvider = new TruckProvider(600, "BELAZ");
+            BMWProvider truckProvider = new BMWProvider(4, "X5");
             universalFactory.AddProvider(truckProvider);
-            Truck truck = universalFactory.CreateTruck();
+            BMW truck = universalFactory.CreateBMW();
             truck.Move();
             // Грузовик это тоже машина
-            Car car1 = universalFactory.CreateTruck();
+            Car car1 = universalFactory.CreateBMW();
             car1?.Move();
             // Нужно уметь явно запрашивать провайдер
-            Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject();
-            car2?.Move();
-            
+            //Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject();
+            //car2?.Move();
+
             // Насчет добавленных одинаковых провайдеров можно не беспокоиться, считаем, что один провайдер на тип
             // Можно явно проверять при добавлении или затирать старый
             // Также не помешает удаление провайдера для его последующей замены
+
+            Console.ReadKey();
         }
     }
 }
