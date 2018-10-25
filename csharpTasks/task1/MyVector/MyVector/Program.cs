@@ -39,6 +39,42 @@ namespace MyVector
             Console.WriteLine("d.GetOrthogonal() = " + d.GetOrthogonal().ToString());
             Console.WriteLine("a.Rotate(1.57) = " + a.Rotate(1.57).ToString());
 
+            try
+            {
+                a = a / 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            try
+            {
+                a.GetAngleBetween(new Vector());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            try
+            {
+                a.GetRelation(new Vector());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            try
+            {
+                (new Vector()).GetOrthogonal();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
             Console.ReadKey();
         }     
         

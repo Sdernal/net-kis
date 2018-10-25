@@ -26,8 +26,8 @@ namespace MyVector
         }        
         */
 
-        public double X_ { get; private set; }
-        public double Y_ { get; private set; }
+        public double X { get; private set; }
+        public double Y { get; private set; }
         
         /// <summary>
         /// Конструктор
@@ -36,8 +36,8 @@ namespace MyVector
         /// <param name="Y"></param>
         public Vector(double X, double Y)
         {
-            this.X_ = X;
-            this.Y_ = Y;
+            this.X = X;
+            this.Y = Y;
 
         }
        
@@ -47,18 +47,17 @@ namespace MyVector
         /// <returns></returns>
         public double Length()
         {
-            return Math.Sqrt(Math.Pow(X_, 2) + Math.Pow(Y_, 2));
+            return Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2));
         }
 
         /// <summary>
         /// Сложение векторов.
         /// </summary>
-        /// <param name="v"></param>
-        /// <returns></returns>
+        /// <param name="v">Второе слагаемое</param>
+        /// <returns>Вектор-сумма</returns>
         public Vector Add(Vector v)
         {
-            Vector result = new Vector(X_ + v.X_,Y_ + v.Y_);
-            return result;
+            return new Vector(X + v.X, Y + v.Y);
         }
 
         /// <summary>
@@ -68,8 +67,7 @@ namespace MyVector
         /// <returns></returns>
         public Vector Scale(double k)
         {
-            Vector result = new Vector(X_ * k, Y_ * k);
-            return result;
+            return new Vector(X * k, Y * k);
         }
 
         /// <summary>
@@ -79,7 +77,7 @@ namespace MyVector
         /// <returns></returns>
         public double DotProduct(Vector v)
         {
-            return v.X_ * this.X_ + v.Y_ * this.Y_;
+            return v.X * this.X + v.Y * this.Y;
         }
 
         /// <summary>
@@ -89,7 +87,7 @@ namespace MyVector
         /// <returns></returns>
         public double CrossProduct(Vector v)
         {
-            return Math.Abs(this.X_ * v.Y_ - this.Y_ * v.X_);
+            return Math.Abs(this.X * v.Y - this.Y * v.X);
         }
 
         /// <summary>
@@ -98,8 +96,7 @@ namespace MyVector
         /// <returns></returns>
         override public string ToString()
         {
-            String result = '(' + this.X_.ToString() + ", " + this.Y_.ToString() + ')';
-            return result;
+            return $"({this.X.ToString()}, {this.Y.ToString()})";
         }
 
         #region Operators        
@@ -118,9 +115,7 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator+ (Vector v, Vector u)
         {
-            double result_X = v.X_ + u.X_;
-            double result_Y = v.Y_ + u.Y_;
-            return new Vector(result_X, result_Y);
+            return new Vector(v.X + u.X, v.Y + u.Y);
         } 
         
         /// <summary>
@@ -131,9 +126,7 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator- (Vector v, Vector u)
         {
-            double result_X = v.X_ - u.X_;
-            double result_Y = v.Y_ - u.Y_;
-            return new Vector(result_X, result_Y);
+            return new Vector(v.X - u.X, v.Y - u.Y);
         } 
         
         /// <summary>
@@ -144,8 +137,8 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator* (Vector v, double k)
         {
-            double result_X = v.X_ * k;
-            double result_Y = v.Y_ * k;
+            double result_X = v.X * k;
+            double result_Y = v.Y * k;
             return new Vector(result_X, result_Y);
         }
 
@@ -157,9 +150,7 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator* (double k, Vector v)
         {
-            double result_X = v.X_ * k;
-            double result_Y = v.Y_ * k;
-            return new Vector(result_X, result_Y);
+            return new Vector(v.X * k, v.Y * k);
         }
 
         /// <summary>
@@ -172,11 +163,9 @@ namespace MyVector
         {
             if (k == 0)
             {
-                throw new DivideByZeroException();
+                throw new Exception("Can't divide Vector by zero");
             }
-            double result_X = v.X_ / k;
-            double result_Y = v.Y_ / k;
-            return new Vector(result_X, result_Y);
+            return new Vector(v.X / k, v.Y / k);
         }
 
         /// <summary>
@@ -196,9 +185,7 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator- (Vector v)
         {
-            double result_X = -v.X_;
-            double result_Y = -v.Y_;
-            return new Vector(result_X, result_Y);
+            return new Vector(-v.X, -v.Y);
 
         }
         #endregion

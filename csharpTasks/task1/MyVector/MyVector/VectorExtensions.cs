@@ -19,6 +19,13 @@ namespace MyVector
     // И не забыть про документацию и тесты
     public static class VectorExtensions
     {
+        private static double EPS_ = 1e-6;
+
+        public static void SetPrecision(double EPS)
+        {
+            EPS_ = EPS;
+        }
+
         /// <summary>
         /// Нормализовать вектор
         /// </summary>
@@ -26,12 +33,10 @@ namespace MyVector
         /// <returns></returns>
         public static Vector Normalize(this Vector v)
         {
-            Vector result = new Vector(0, 0);
-            try {
-                result = new Vector(v.X_ / v.Length(), v.Y_ / v.Length());
-            } 
-            catch (DivideByZeroException){
-                Console.WriteLine("Division by zero.", v.Length());
+            Vector result = new Vector();
+            if (v.Length() < EPS_)
+            {
+                result = v / v.Length();
             }
             return result;
         }
@@ -41,13 +46,13 @@ namespace MyVector
         /// </summary>
         /// <param name="v"></param>
         /// <param name="u"></param>
-        /// <param name="eps"></param>
+        /// <param name="EPS_"></param>
         /// <returns></returns>
-        public static double GetAngleBetween(this Vector v, Vector u, double eps = 1e-6)
+        public static double GetAngleBetween(this Vector v, Vector u)
         {
-            if (Math.Abs(v.Length()) < eps  || Math.Abs(u.Length()) < eps )
+            if (Math.Abs(v.Length()) < EPS_ || Math.Abs(u.Length()) < EPS_)
             {
-                throw new DivideByZeroException();
+                throw new Exception("Can't get angle between vectors when argument is zero-vector");
             }
             return Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
         }
@@ -57,21 +62,21 @@ namespace MyVector
         /// </summary>
         /// <param name="v"></param>
         /// <param name="u"></param>
-        /// <param name="eps"></param>
+        /// <param name="EPS_"></param>
         /// <returns></returns>
-        public static VectorRelation GetRelation(this Vector v, Vector u, double eps = 1e-6)
+        public static VectorRelation GetRelation(this Vector v, Vector u)
         {
-            if (Math.Abs(v.Length()) < eps  || Math.Abs(u.Length()) < eps )
+            if (Math.Abs(v.Length()) < EPS_  || Math.Abs(u.Length()) < EPS_ )
             {
                 throw new ArgumentException("Can't get relation when argument is zero-vector");
             }
 
-            if (Math.Abs(v.DotProduct(u)) < eps)
+            if (Math.Abs(v.DotProduct(u)) < EPS_)
             {
                 return VectorRelation.Orthogonal;
             }
 
-            if (Math.Abs(v.CrossProduct(u)) < eps)
+            if (Math.Abs(v.CrossProduct(u)) < EPS_)
             {
                 return VectorRelation.Parallel;
             } else {
@@ -84,23 +89,23 @@ namespace MyVector
         /// </summary>
         /// <param name="v"></param>
         /// <param name="orientation"></param>
-        /// <param name="eps"></param>
+        /// <param name="EPS_"></param>
         /// <returns></returns>
-        public static Vector GetOrthogonal(this Vector v, bool orientation = true, double eps = 1e-6)
+        public static Vector GetOrthogonal(this Vector v, bool orientation = true)
         {
-            if (Math.Abs(v.Length()) < eps)
+            if (Math.Abs(v.Length()) < EPS_)
             {
                 throw new ArgumentException("Can't find orthogonal for zero-vector");
             }
             if (orientation)
             {
-                double result_X = -v.Y_ / v.Length();
-                double result_Y = v.X_ / v.Length();
+                double result_X = -v.Y / v.Length();
+                double result_Y = v.X / v.Length();
                 return new Vector(result_X, result_Y);
             } else 
             {
-                double result_X = v.Y_ / v.Length();
-                double result_Y = -v.X_ / v.Length();
+                double result_X = v.Y / v.Length();
+                double result_Y = -v.X / v.Length();
                 return new Vector(result_X, result_Y);   
             }
         }
@@ -117,13 +122,13 @@ namespace MyVector
 
             if (orientation)
             {
-                double result_X = v.X_ * Math.Cos(angle) - v.Y_ * Math.Sin(angle);
-                double result_Y = v.X_ * Math.Sin(angle) + v.Y_ * Math.Cos(angle);
+                double result_X = v.X * Math.Cos(angle) - v.Y * Math.Sin(angle);
+                double result_Y = v.X * Math.Sin(angle) + v.Y * Math.Cos(angle);
                 return new Vector(result_X, result_Y);
-            } else 
-            {
-                double result_X = v.X_ * Math.Cos(angle) + v.Y_ * Math.Sin(angle);
-                double result_Y = -v.X_ * Math.Sin(angle) + v.Y_ * Math.Cos(angle);
+            }
+            else {
+                double result_X = v.X * Math.Cos(angle) + v.Y * Math.Sin(angle);
+                double result_Y = -v.X * Math.Sin(angle) + v.Y * Math.Cos(angle);
                 return new Vector(result_X, result_Y);
 
             }
