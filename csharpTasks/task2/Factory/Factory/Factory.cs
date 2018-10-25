@@ -9,12 +9,12 @@ namespace Factory
             throw new NotImplementedException();
         }
 
-        public void AddProvider(IFactoryProvider provider)
+        public void AddProvider(IFactoryProvider<IMovable> provider)
         {
             throw new NotImplementedException();
         }
 
-        public IFactoryProvider GetProvider<T>()
+        public T GetProvider<T>() where T : IFactoryProvider<IMovable>
         {
             throw new NotImplementedException();
         }

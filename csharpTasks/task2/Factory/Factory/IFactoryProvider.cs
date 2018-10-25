@@ -1,7 +1,7 @@
 namespace Factory
 {
-    interface IFactoryProvider
+    interface IFactoryProvider<out T> where T : IMovable
     {
-        IMovable CreateObject();
+        T CreateObject();
     }
 }

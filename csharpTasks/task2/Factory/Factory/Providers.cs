@@ -2,15 +2,15 @@ using System;
 
 namespace Factory
 {
-    class CarProvider : IFactoryProvider
+    class CarProvider : IFactoryProvider<Car>
     {
-        public IMovable CreateObject()
+        public Car CreateObject()
         {
             throw new NotImplementedException();
         }
     }
 
-    class TruckProvider : CarProvider // TODO: think about this inheritance
+    class TruckProvider : IFactoryProvider<Truck> // TODO: think about this inheritance
     {
         public TruckProvider(int a, string b) // TODO: rename it
         {
@@ -18,13 +18,18 @@ namespace Factory
             _b = b;
         }
 
+        public Truck CreateObject()
+        {
+            throw new NotImplementedException();
+        }
+
         private int _a;
         private string _b; // TODO: rename it
     }
 
-    class PlaneProvider : IFactoryProvider
+    class PlaneProvider : IFactoryProvider<Plane>
     {
-        public IMovable CreateObject()
+        public Plane CreateObject()
         {
             throw new NotImplementedException();
         }
