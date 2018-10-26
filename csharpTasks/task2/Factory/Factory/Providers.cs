@@ -4,10 +4,21 @@ namespace Factory
 {
     class CarProvider : IFactoryProvider<Car>
     {
+        public CarProvider(string name, uint passengerSeats, uint wheels)
+        {
+            Name = name;
+            PassengerSeats = passengerSeats;
+            Wheels = wheels;
+        }
+
         public Car CreateObject()
         {
-            throw new NotImplementedException();
+            return new Car(Name, PassengerSeats, Wheels);
         }
+
+        public string Name { get; set; }
+        public uint PassengerSeats { get; set; }
+        public uint Wheels { get; set; }
     }
 
     class TruckProvider : IFactoryProvider<Truck> // TODO: think about this inheritance
