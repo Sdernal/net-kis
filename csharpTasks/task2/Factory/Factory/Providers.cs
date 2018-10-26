@@ -21,21 +21,26 @@ namespace Factory
         public uint Wheels { get; set; }
     }
 
-    class TruckProvider : IFactoryProvider<Truck> // TODO: think about this inheritance
+    class TruckProvider : IFactoryProvider<Truck>
     {
-        public TruckProvider(int a, string b) // TODO: rename it
+        public TruckProvider(string name, uint passengerSeats,
+            uint wheels, uint maxWeight)
         {
-            _a = a;
-            _b = b;
+            Name = name;
+            PassengerSeats = passengerSeats;
+            Wheels = wheels;
+            MaxWeight = maxWeight;
         }
 
         public Truck CreateObject()
         {
-            throw new NotImplementedException();
+            return new Truck(Name, PassengerSeats, Wheels, MaxWeight);
         }
 
-        private int _a;
-        private string _b; // TODO: rename it
+        public string Name { get; set; }
+        public uint PassengerSeats { get; set; }
+        public uint Wheels { get; set; }
+        public uint MaxWeight { get; set; }
     }
 
     class PlaneProvider : IFactoryProvider<Plane>

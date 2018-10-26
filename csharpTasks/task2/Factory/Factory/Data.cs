@@ -35,7 +35,7 @@ namespace Factory
             Console.WriteLine($"I'm {Name}. I have {Wheels} wheels and " +
                               $"{PassengerSeats} passenger seats.");
             Console.WriteLine("Also, I can deliver " +
-                              $"{MaxWeight} tones of items");
+                              $"{MaxWeight} tones of items.");
         }
 
         protected uint MaxWeight;
