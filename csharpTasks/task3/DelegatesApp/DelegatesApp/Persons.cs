@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace DelegatesApp
 {
@@ -8,6 +9,7 @@ namespace DelegatesApp
     {
         public int Age { get; set; }
         public string Name { get; set; }
+
         public override string ToString()
         {
             return $"Имя: {Name} Возраст: {Age}";
@@ -19,20 +21,29 @@ namespace DelegatesApp
     public class PersonContainer
     {
         public Person[] People { get; set; }
-        
-        public Person GetOne()
-        {
-            throw new NotImplementedException();
+
+        public Person GetOne(Func<Person, bool> filter) {
+            try {
+                return People.Single(filter);
+            }
+            catch (InvalidOperationException e) {
+                return null;
+            }
         }
 
-        public IEnumerable<Person> GetAll()
+        public IEnumerable<Person> GetAll(Func<Person, bool> filter)
         {
-            throw new NotImplementedException();
+            try {
+                return People.Where(filter);
+            }
+            catch (InvalidOperationException e) {
+                return null;
+            }
         }
 
-        public bool Contains()
+        public bool Contains(Func<Person, bool> filter)
         {
-            throw new NotImplementedException();
+            return People.Any(filter);
         }
     }
 }
