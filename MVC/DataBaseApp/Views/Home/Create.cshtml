@@ -1,0 +1,23 @@
+﻿@model Person
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Добавление пользователя</h2>
+<form method="post" asp-action="Create" asp-controller="Home">
+<div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Age"></label><br />
+        <input asp-for="Age" />
+        <span asp-validation-for="Age"></span>
+    </div>
+    <div>
+        <input type="submit" value="Добавить" />
+    </div>
+</form>
+

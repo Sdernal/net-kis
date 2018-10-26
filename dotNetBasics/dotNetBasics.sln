@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericsCollections", "Gene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyCalculator", "DummyCalculator\DummyCalculator.csproj", "{8EC50570-7338-4ECB-B366-6950CFD4588B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyCalculator.Tests", "DummyCalculator.Tests\DummyCalculator.Tests.csproj", "{00A9E2B5-B699-49E6-BF81-929B0C474BED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyCalculator.Tests", "DummyCalculator.Tests\DummyCalculator.Tests.csproj", "{00A9E2B5-B699-49E6-BF81-929B0C474BED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqApp", "LinqApp\LinqApp.csproj", "{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{00A9E2B5-B699-49E6-BF81-929B0C474BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00A9E2B5-B699-49E6-BF81-929B0C474BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00A9E2B5-B699-49E6-BF81-929B0C474BED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
