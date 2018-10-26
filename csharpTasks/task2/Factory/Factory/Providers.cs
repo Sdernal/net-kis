@@ -68,17 +68,17 @@ namespace Factory
     {
         public static Car CreateCar(this Factory factory)
         {
-            throw new NotImplementedException();
+            return factory.GetProvider<CarProvider>()?.CreateObject();
         }
 
         public static Truck CreateTruck(this Factory factory)
         {
-            throw new NotImplementedException();
+            return factory.GetProvider<TruckProvider>()?.CreateObject();
         }
 
         public static Plane CreatePlane(this Factory factory)
         {
-            throw new NotImplementedException();
+            return factory.GetProvider<PlaneProvider>()?.CreateObject();
         }
     }
 }
