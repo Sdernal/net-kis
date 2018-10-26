@@ -45,10 +45,23 @@ namespace Factory
 
     class PlaneProvider : IFactoryProvider<Plane>
     {
+        public PlaneProvider(string name, uint wings, uint wheels, uint maxTakeOffWeight)
+        {
+            Name = name;
+            Wings = wings;
+            Wheels = wheels;
+            MaxTakeOffWeight = maxTakeOffWeight;
+        }
+
         public Plane CreateObject()
         {
-            throw new NotImplementedException();
+            return new Plane(Name, Wings, Wheels, MaxTakeOffWeight);
         }
+
+        public string Name { get; set; }
+        public uint Wings { get; set; }
+        public uint Wheels { get; set; }
+        public uint MaxTakeOffWeight { get; set; }
     }
 
     static class FactoryExtensions
