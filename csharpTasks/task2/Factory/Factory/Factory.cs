@@ -28,6 +28,17 @@ namespace Factory
                 .FirstOrDefault();
         }
 
+        public void RemoveProvider<T>() where T : class,
+            IFactoryProvider<IMovable>
+        {
+            for (var i = 0; i < _providers.Count; ++i)
+            {
+                if (_providers[i].GetType() != typeof(T)) continue;
+                _providers.RemoveAt(i);
+                return;
+            }
+        }
+
         private List<IFactoryProvider<IMovable>> _providers;
     }
 }
