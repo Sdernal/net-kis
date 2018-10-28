@@ -17,9 +17,9 @@ namespace Factory
                               $"{PassengerSeats} passenger seats.");
         }
 
-        protected string Name;
-        protected uint PassengerSeats;
-        protected uint Wheels;
+        public string Name { get; protected set; }
+        public uint PassengerSeats { get; protected set; }
+        public uint Wheels { get; protected set; }
     }
 
     class Truck : Car
@@ -38,7 +38,7 @@ namespace Factory
                               $"{MaxWeight} tones of items.");
         }
 
-        protected uint MaxWeight;
+        public uint MaxWeight { get; protected set; }
     }
 
     class Plane : IMovable
@@ -58,9 +58,9 @@ namespace Factory
                               $" wheels. My MTOW is {MaxTakeoffWeight} tones");
         }
 
-        protected string Name;
-        protected uint Wings;
-        protected uint Wheels;
-        protected uint MaxTakeoffWeight;
+        public string Name { get; protected set; }
+        public uint Wings { get; protected set; }
+        public uint Wheels { get; protected set; }
+        public uint MaxTakeoffWeight { get; protected set; }
     }
 }
