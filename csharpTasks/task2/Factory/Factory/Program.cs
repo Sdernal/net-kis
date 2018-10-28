@@ -27,8 +27,19 @@ namespace Factory
             Car car1 = universalFactory.CreateTruck();
             car1?.Move();
             // Нужно уметь явно запрашивать провайдер
-            Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject();
+            Car car2 = universalFactory.GetProvider<TruckProvider>()
+                .CreateObject();
             car2?.Move();
+
+            universalFactory.RemoveProvider<CarProvider>();
+            universalFactory.CreateCar()?.Move();
+            universalFactory.GetProvider<CarProvider>()?.CreateObject().Move();
+            universalFactory.CreateTruck().Move();
+
+            universalFactory.AddProvider(
+                new PlaneProvider("Boeing 737", 1, 3, 79));
+            universalFactory.CreatePlane().Move();
+            universalFactory.GetProvider<PlaneProvider>().CreateObject().Move();
 
             // Насчет добавленных одинаковых провайдеров можно не беспокоиться, считаем, что один провайдер на тип
             // Можно явно проверять при добавлении или затирать старый
