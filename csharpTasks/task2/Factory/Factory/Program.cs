@@ -28,6 +28,15 @@ namespace Factory
             Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject();
             car2?.Move();
             
+            PlaneProvider planeProvider = new PlaneProvider();
+            universalFactory.AddProvider(planeProvider);
+            Plane plane = universalFactory.CreatePlane();
+            plane?.Move();
+            TruckProvider otherTruckProvider = new TruckProvider(1000, "OTHER");
+            universalFactory.AddProvider(otherTruckProvider);
+            Truck otherTruck = universalFactory.CreateTruck();
+            otherTruck.Move();
+
             // Насчет добавленных одинаковых провайдеров можно не беспокоиться, считаем, что один провайдер на тип
             // Можно явно проверять при добавлении или затирать старый
             // Также не помешает удаление провайдера для его последующей замены
