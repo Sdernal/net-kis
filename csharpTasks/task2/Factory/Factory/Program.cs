@@ -8,26 +8,28 @@ namespace Factory
 {
     class Program
     {
-        public static void Main(string[] args) {
+        public static void Main(string[] args)
+        {
             Factory universalFactory = new Factory();
             // Нужно уметь добавлять провайдеры
-            universalFactory.AddProvider(new CarProvider());
+            universalFactory.AddProvider(new CarProvider("Zhiguli", 3, 4));
             // С помощью которых создавать нужные объекты
             Car car = universalFactory.CreateCar();
             car.Move(); // Просто выводит в консоль информацию о себе
 
             // Также можно задавать параметризованные провайдеры
-            TruckProvider truckProvider = new TruckProvider(600, "BELAZ");
+            TruckProvider truckProvider = new TruckProvider("BELAZ", 0, 4, 27);
             universalFactory.AddProvider(truckProvider);
             Truck truck = universalFactory.CreateTruck();
             truck.Move();
             // Грузовик это тоже машина
+            universalFactory.AddProvider(new TruckProvider("KamAZ", 1, 6, 13));
             Car car1 = universalFactory.CreateTruck();
             car1?.Move();
             // Нужно уметь явно запрашивать провайдер
             Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject();
             car2?.Move();
-            
+
             // Насчет добавленных одинаковых провайдеров можно не беспокоиться, считаем, что один провайдер на тип
             // Можно явно проверять при добавлении или затирать старый
             // Также не помешает удаление провайдера для его последующей замены
