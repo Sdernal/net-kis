@@ -12,7 +12,7 @@ namespace DelegatesApp
 
         public override string ToString()
         {
-            return $"Имя: {Name} Возраст: {Age}";
+            return $"Person(Name: {Name}, Age: {Age});";
         }
     }
 
@@ -26,7 +26,7 @@ namespace DelegatesApp
             try {
                 return People.Single(filter);
             }
-            catch (InvalidOperationException e) {
+            catch (InvalidOperationException) {
                 return null;
             }
         }
@@ -36,7 +36,7 @@ namespace DelegatesApp
             try {
                 return People.Where(filter);
             }
-            catch (InvalidOperationException e) {
+            catch (InvalidOperationException) {
                 return null;
             }
         }

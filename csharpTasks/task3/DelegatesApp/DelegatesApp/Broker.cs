@@ -7,10 +7,10 @@ namespace DelegatesApp
     // Класс брокера, который торгует акциями
     public class Broker : ISubscriber
     {
-        private int brokerMoney;
+        private double brokerMoney;
         // устанавливаем деньги брокера        
         // Как хранить купленные акции - решайте сами
-        public Broker(int money = 1000)
+        public Broker(double money = 1000.0)
         {
             brokerMoney = money;
         }

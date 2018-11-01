@@ -12,7 +12,15 @@ namespace DelegatesApp
 
     public class MarketEventArgs
     {
-        /*Здесь можно добавить что угодно, цену, название компании и т.п.*/
+        public readonly string CompanyName;
+        public readonly double ExchangeRate;
+
+        private MarketEventArgs() { }
+
+        public MarketEventArgs(string _CompanyName, double _ExcnahgeRate) {
+            CompanyName = _CompanyName;
+            ExchangeRate = _ExcnahgeRate;
+        }
     }
 
     // Биржа, торгующая акциями
@@ -21,22 +29,23 @@ namespace DelegatesApp
         public delegate void MarketDelegate(object sender, MarketEventArgs args);
         public event MarketDelegate Notify;
 
-        public Dictionary<string, int> Shares { get; }
-        // Устанавливаем цены акций, хз как правильно они называются
-        // В параметр передаем список имен акций
+        public readonly Dictionary<string, int> Stocks;
+
+        private List<ISubscriber> subscribers;
+
         public Market(string[] shares)
         {
-            Shares = new Dictionary<string, int>();
+            Stocks = new Dictionary<string, int>();
             Random rnd = new Random();
             foreach (var share in shares)
             {
-                Shares.Add(share, rnd.Next(100, 1000));
+                Stocks.Add(share, rnd.Next(100, 1000));
             }
         }
-        // Добавляет подписчика
+
         public void AddSubscriber(ISubscriber sub)
         {
-            throw new NotImplementedException();
+            subscribers.Add(sub);
         }
 
         // Запускает ход торгов (устанавливает цену акциям) и уведомляет подписчиков
