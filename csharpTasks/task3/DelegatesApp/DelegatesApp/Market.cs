@@ -13,14 +13,16 @@ namespace DelegatesApp
     public class MarketEventArgs
     {
         /*Здесь можно добавить что угодно, цену, название компании и т.п.*/
-        public MarketEventArgs(string name, int newPrice)
+        public MarketEventArgs(string name, int newPrice, int oldPrice)
         {
             Name = name;
             NewPrice = newPrice;
+            OldPrice = oldPrice;
         }
 
         public string Name { get; set; }
         public int NewPrice { get; set; }
+        public int OldPrice { get; set; }
     }
 
     // Биржа, торгующая акциями
@@ -63,9 +65,11 @@ namespace DelegatesApp
                 enumerator.MoveNext();
             }
 
-            Shares[enumerator.Current.Key] = random.Next(100, 1000);
+            var oldPrice = enumerator.Current.Value;
+            var newPrice = random.Next(100, 1000);
+            Shares[enumerator.Current.Key] = newPrice;
             Notify?.Invoke(this, new MarketEventArgs(enumerator.Current.Key,
-                enumerator.Current.Value));
+                newPrice, oldPrice));
             enumerator.Dispose();
         }
 
