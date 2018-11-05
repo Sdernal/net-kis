@@ -29,7 +29,7 @@ namespace DelegatesApp
         public delegate void MarketDelegate(object sender, MarketEventArgs args);
 
         public event MarketDelegate Notify;
-        
+
         public Dictionary<string, int> Shares { get; }
         private Random random;
 
@@ -73,12 +73,37 @@ namespace DelegatesApp
         /// Покупка акций
         /// </summary>
         /// <param name="shareName">Имя акции</param>
+        /// <param name="amount">Количество покупаемых акций</param>
         /// <param name="count">Ссылка на акции брокера</param>
         /// <param name="account">Ссылка на счет брокера</param>
-        public void Buy(string shareName, ref int count, ref int account)
+        public void Buy(string shareName, int amount,
+            ref int count, ref int account)
         {
-            // Покупка акций 
-            // Биржа сама должна из одного мметса вычесть, в другое прибавить
+            int price;
+            try
+            {
+                price = Shares[shareName];
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("It's empty, stupid!");
+                return;
+            }
+            catch (KeyNotFoundException)
+            {
+                Console.WriteLine($"There is no share named \"{shareName}\"");
+                return;
+            }
+
+            var sum = price * amount;
+            if (sum > account)
+            {
+                Console.WriteLine("You don't have enough money!");
+                return;
+            }
+
+            account -= sum;
+            count += amount;
         }
 
 
