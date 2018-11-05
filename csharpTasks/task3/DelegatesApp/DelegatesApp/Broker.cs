@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace DelegatesApp
-{    
+{
     // Класс брокера, который торгует акциями
     public class Broker : ISubscriber
     {
-        private int brokerMoney;
-        // устанавливаем деньги брокера        
-        // Как хранить купленные акции - решайте сами
+        private int _brokerMoney;
+        private Dictionary<string, int> _shares;
+
         public Broker(int money = 1000)
         {
-            brokerMoney = money;
+            _brokerMoney = money;
+            _shares = new Dictionary<string, int>();
         }
 
         // Тут логика такая: с биржи прилетает обновление. Брокер может либо продать акции, либо купить  
