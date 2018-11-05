@@ -107,9 +107,33 @@ namespace DelegatesApp
         }
 
 
-        public void Sell(string shareName, ref int count, ref int account)
+        public void Sell(string shareName, int amount,
+            ref int count, ref int account)
         {
-            // Продажа 
+            int price;
+            try
+            {
+                price = Shares[shareName];
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("It's empty, stupid!");
+                return;
+            }
+            catch (KeyNotFoundException)
+            {
+                Console.WriteLine($"There is no share named \"{shareName}\"");
+                return;
+            }
+
+            if (count < amount)
+            {
+                Console.WriteLine("You don't have enough shares!");
+                return;
+            }
+
+            count -= amount;
+            account += amount * price;
         }
     }
 }
