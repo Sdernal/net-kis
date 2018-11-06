@@ -69,5 +69,23 @@ namespace DelegatesApp
                 _shares[args.Name] = count;
             }
         }
+
+        public override string ToString()
+        {
+            var res = $"Broker\n Money: {_brokerMoney}\n Shares:\n";
+
+            var enumerator = _shares.GetEnumerator();
+            enumerator.MoveNext();
+
+            for (var i = 0; i < _shares.Count; i++)
+            {
+                res += $"  {enumerator.Current.Key}: " +
+                       $"{enumerator.Current.Value}\n";
+                enumerator.MoveNext();
+            }
+
+            enumerator.Dispose();
+            return res;
+        }
     }
 }
