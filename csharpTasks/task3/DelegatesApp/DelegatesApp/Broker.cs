@@ -34,7 +34,7 @@ namespace DelegatesApp
                 {
                     count = _shares[args.Name];
                 }
-                catch (ArgumentNullException e)
+                catch (ArgumentNullException)
                 {
                     Console.WriteLine("It's empty!");
                     return;
@@ -54,7 +54,7 @@ namespace DelegatesApp
                 {
                     count = _shares[args.Name];
                 }
-                catch (ArgumentNullException e)
+                catch (ArgumentNullException)
                 {
                     Console.WriteLine("It's empty!");
                     return;

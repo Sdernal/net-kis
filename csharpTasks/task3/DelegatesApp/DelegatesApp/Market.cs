@@ -59,6 +59,7 @@ namespace DelegatesApp
             // При реализации можно взять рандомную акцию, выставить у неё цену (тоже рандомно в некоторых пределах)
             // и проинформировать подписчиков
             var enumerator = Shares.GetEnumerator();
+            enumerator.MoveNext();
             var num = random.Next(Shares.Count);
             for (var i = 0; i < num; i++)
             {
