@@ -20,7 +20,54 @@ namespace DelegatesApp
         // При покупке или продаже брокер передает ссылку на свои счета, а биржа должна сама все высавить
         public void Notified(object sender, MarketEventArgs args)
         {
-            throw new NotImplementedException();
+            if (!(sender is Market market))
+            {
+                Console.WriteLine("It's a spam!");
+                return;
+            }
+
+            if (args.NewPrice < 330)
+            {
+                var amount = _brokerMoney / args.NewPrice;
+                int count;
+                try
+                {
+                    count = _shares[args.Name];
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine("It's empty!");
+                    return;
+                }
+                catch (KeyNotFoundException)
+                {
+                    count = 0;
+                }
+
+                market.Buy(args.Name, amount, ref count, ref _brokerMoney);
+                _shares[args.Name] = count;
+            }
+            else if (args.NewPrice > 670)
+            {
+                int count;
+                try
+                {
+                    count = _shares[args.Name];
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine("It's empty!");
+                    return;
+                }
+                catch (KeyNotFoundException)
+                {
+                    return;
+                }
+
+                if (count == 0) return;
+                market.Sell(args.Name, count, ref count, ref _brokerMoney);
+                _shares[args.Name] = count;
+            }
         }
     }
 }
