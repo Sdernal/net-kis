@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyCalculator", "DummyCal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyCalculator.Tests", "DummyCalculator.Tests\DummyCalculator.Tests.csproj", "{00A9E2B5-B699-49E6-BF81-929B0C474BED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqApp", "LinqApp\LinqApp.csproj", "{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqApp", "LinqApp\LinqApp.csproj", "{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOApp", "IOApp\IOApp.csproj", "{B42B9BDD-0328-4EE6-AE19-FFFDD20F8A30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A138DC48-738F-40F4-ADDB-CAE2652CAD0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B42B9BDD-0328-4EE6-AE19-FFFDD20F8A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B42B9BDD-0328-4EE6-AE19-FFFDD20F8A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B42B9BDD-0328-4EE6-AE19-FFFDD20F8A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B42B9BDD-0328-4EE6-AE19-FFFDD20F8A30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
