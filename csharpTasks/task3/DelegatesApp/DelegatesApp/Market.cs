@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DelegatesApp
@@ -12,66 +13,63 @@ namespace DelegatesApp
 
     public class MarketEventArgs
     {
-        public readonly string CompanyName;
+        public readonly string ShareName;
         public readonly double ExchangeRate;
 
         private MarketEventArgs() { }
 
-        public MarketEventArgs(string _CompanyName, double _ExcnahgeRate) {
-            CompanyName = _CompanyName;
-            ExchangeRate = _ExcnahgeRate;
+        public MarketEventArgs(string _ShareName, double _ExchangeRate) {
+            ShareName = _ShareName;
+            ExchangeRate = _ExchangeRate;
         }
     }
-
-    // Биржа, торгующая акциями
+    
     public class Market
     {
         public delegate void MarketDelegate(object sender, MarketEventArgs args);
         public event MarketDelegate Notify;
 
-        public readonly Dictionary<string, int> Stocks;
-
-        private List<ISubscriber> subscribers;
+        public readonly Dictionary<string, double> Stocks;
 
         public Market(string[] shares)
         {
-            Stocks = new Dictionary<string, int>();
+            Stocks = new Dictionary<string, double>();
+
             Random rnd = new Random();
             foreach (var share in shares)
             {
-                Stocks.Add(share, rnd.Next(100, 1000));
+                Stocks.Add(share, rnd.Next(100, 1000) + rnd.NextDouble());
             }
         }
 
         public void AddSubscriber(ISubscriber sub)
         {
-            subscribers.Add(sub);
-        }
-
-        // Запускает ход торгов (устанавливает цену акциям) и уведомляет подписчиков
-        public void Trade()
-        {
-            // При реализации можно взять рандомную акцию, выставить у неё цену (тоже рандомно в некоторых пределах)
-            // и проинформировать подписчиков
-            throw new NotImplementedException();
+            Notify += sub.Notified;
         }
         
-        /// <summary>
-        /// Покупка акций
-        /// </summary>
-        /// <param name="shareName">Имя акции</param>
-        /// <param name="count">Ссылка на акции брокера</param>
-        /// <param name="account">Ссылка на счет брокера</param>
-        public void Buy(string shareName, ref int count, ref int account)
+        public void Trade()
         {
-            // Покупка акций 
-            // Биржа сама должна из одного мметса вычесть, в другое прибавить
+            Random rnd = new Random();
+            string shareName = Enumerable.ToList(Stocks.Keys)[rnd.Next(Stocks.Count)];
+            double delta = rnd.Next(-5, 4) + rnd.NextDouble();
+            Stocks[shareName] += delta;
+
+            MarketEventArgs args = new MarketEventArgs(shareName, Stocks[shareName]);
+            Notify(this, args);
+        }
+        
+        public void Buy(string shareName, ref int count, ref double account)
+        {
+            int shareCount = (int)Math.Floor(account / Stocks[shareName]);
+            count += shareCount;
+            account -= Stocks[shareName] * shareCount;
         }
 
 
-        public void Sell(string shareName, ref int count, ref int account)
+        public void Sell(string shareName, ref int count, ref double account)
         {
-            // Продажа 
+            account += Stocks[shareName] * count;
+            count = 0;
         }
     }
 }

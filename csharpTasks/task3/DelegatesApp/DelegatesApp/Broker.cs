@@ -8,18 +8,32 @@ namespace DelegatesApp
     public class Broker : ISubscriber
     {
         private double brokerMoney;
-        // устанавливаем деньги брокера        
-        // Как хранить купленные акции - решайте сами
+        private Dictionary<string, int> brokerStocks;
+
         public Broker(double money = 1000.0)
         {
             brokerMoney = money;
+            brokerStocks = new Dictionary<string, int>();
         }
-
+        
         // Тут логика такая: с биржи прилетает обновление. Брокер может либо продать акции, либо купить  
         // При покупке или продаже брокер передает ссылку на свои счета, а биржа должна сама все высавить
         public void Notified(object sender, MarketEventArgs args)
         {
-            throw new NotImplementedException();
+            Market market = sender as Market;
+            int stocks = 0;
+            if (brokerStocks.ContainsKey(args.ShareName)) {
+                stocks = brokerStocks[args.ShareName];
+            }
+
+            Random rnd = new Random();
+            if (rnd.Next() % 2 == 0) {
+                market.Buy(args.ShareName, ref stocks, ref brokerMoney);
+            }
+            else {
+                market.Sell(args.ShareName, ref stocks, ref brokerMoney);
+            }
+            brokerStocks[args.ShareName] = stocks;
         }
     }
 }

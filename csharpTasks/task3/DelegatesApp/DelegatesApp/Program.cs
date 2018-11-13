@@ -7,12 +7,11 @@ namespace DelegatesApp
     {
         static void Main(string[] args)
         {
-            //Market market = new Market(new string[] { "Apple", "Google" });
-            //market.AddSubscriber(new Broker());
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    market.Trade();
-            //}
+            Market market = new Market(new string[] { "Apple", "Google" });
+            market.AddSubscriber(new Broker());
+            for (int i = 0; i < 10; i++) {
+                market.Trade();
+            }
 
             PersonContainer container = new PersonContainer();
             container.People = new Person[]
