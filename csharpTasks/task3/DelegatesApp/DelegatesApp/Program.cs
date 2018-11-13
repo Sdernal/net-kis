@@ -24,6 +24,8 @@ namespace DelegatesApp
             {
                 Console.WriteLine(p.ToString());
             }
+
+            Console.ReadKey();
         }
     }
 }

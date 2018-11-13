@@ -7,26 +7,35 @@ namespace DelegatesApp
     // Интерфейс подписчика на изменения цен в акциях
     public interface ISubscriber
     {
-        void Notified(object sender, MarketEventArgs args);
+        void Notified(Market sender, MarketEventArgs args);
     }
 
     public class MarketEventArgs
     {
-        /*Здесь можно добавить что угодно, цену, название компании и т.п.*/
+        public string ShareName { get; }
+        public int SharePrice { get; }
+
+        public MarketEventArgs(string name, int price)
+        {
+            ShareName = name;
+            SharePrice = price;
+        }
     }
 
     // Биржа, торгующая акциями
     public class Market
     {
-        public delegate void MarketDelegate(object sender, MarketEventArgs args);
+        public delegate void MarketDelegate(Market sender, MarketEventArgs args);
         public event MarketDelegate Notify;
 
         public Dictionary<string, int> Shares { get; }
+        private List<ISubscriber> Subscribers;
         // Устанавливаем цены акций, хз как правильно они называются
         // В параметр передаем список имен акций
         public Market(string[] shares)
         {
             Shares = new Dictionary<string, int>();
+            Subscribers = new List<ISubscriber>();
             Random rnd = new Random();
             foreach (var share in shares)
             {
@@ -36,15 +45,30 @@ namespace DelegatesApp
         // Добавляет подписчика
         public void AddSubscriber(ISubscriber sub)
         {
-            throw new NotImplementedException();
+            Notify += sub.Notified;
         }
 
         // Запускает ход торгов (устанавливает цену акциям) и уведомляет подписчиков
         public void Trade()
         {
-            // При реализации можно взять рандомную акцию, выставить у неё цену (тоже рандомно в некоторых пределах)
-            // и проинформировать подписчиков
-            throw new NotImplementedException();
+            Random rnd = new Random();
+            string ShareName = "";
+            int index = rnd.Next(Shares.Count);
+
+            foreach(string key in Shares.Keys)
+            {
+                if (index > 0)
+                {
+                    ShareName = key;
+                    break;
+                }
+                index--;
+            }
+
+            Shares[ShareName] = rnd.Next(100, 1000);
+
+            MarketEventArgs newArgs = new MarketEventArgs(ShareName, Shares[ShareName]);
+            Notify(this, newArgs);
         }
         
         /// <summary>
@@ -55,14 +79,21 @@ namespace DelegatesApp
         /// <param name="account">Ссылка на счет брокера</param>
         public void Buy(string shareName, ref int count, ref int account)
         {
-            // Покупка акций 
-            // Биржа сама должна из одного мметса вычесть, в другое прибавить
+            if (account >= Shares[shareName])
+            {
+                account -= Shares[shareName];
+                count++;
+            }
         }
 
 
         public void Sell(string shareName, ref int count, ref int account)
         {
-            // Продажа 
+            if (count > 0)
+            {
+                count--;
+                account += Shares[shareName];
+            }
         }
     }
 }
