@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Factory
 {
-    abstract class Vehicle: IMovable
-    {
-        public abstract void Move();
-    }
-
-    class Car: Vehicle
+    class Car: IMovable
     {
         protected int NumDoors;
         public Car()
@@ -22,7 +17,7 @@ namespace Factory
         {
             NumDoors = num;
         }
-        public override void Move()
+        public virtual void Move()
         {
             Console.WriteLine("This is the car!");
         }
@@ -41,14 +36,14 @@ namespace Factory
             Console.WriteLine($"This is the BMW {Type} with displacement {Displacement} litres!");
         }
     }
-    class Zeppelin: Vehicle
+    class Zeppelin: IMovable
     {
         private String ShellType;
         public Zeppelin(string Type)
         {
             ShellType = Type;
         }
-        public override void Move()
+        public virtual void Move()
         {
             Console.WriteLine($"This is the Zeppelin with {ShellType} type of shell!");
         }

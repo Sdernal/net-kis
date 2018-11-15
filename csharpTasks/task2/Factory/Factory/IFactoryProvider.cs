@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Factory
 {
-    interface IFactoryProvider
+    interface IFactoryProvider<out T> where T : IMovable
     {
-
+        T CreateObject();
     }
 }

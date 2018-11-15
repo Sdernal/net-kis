@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace Factory
 {
-    abstract class Provider
-    {
-        public abstract Vehicle CreateObject();
-
-        public abstract string GetProviderType();
-    }
-    class CarProvider: Provider
+    class CarProvider: IFactoryProvider<Car>
     {
         protected int NumDoors;
         public CarProvider()
@@ -23,18 +17,14 @@ namespace Factory
         {
             NumDoors = num;
         }
-
-        public override string GetProviderType()
-        {
-            return "Car";
-        }
-        public override Vehicle CreateObject()
+        
+        public Car CreateObject()
         {
             Car newCar = new Car(NumDoors);
             return newCar;
         }
     }
-    class BMWProvider: CarProvider
+    class BMWProvider: IFactoryProvider<BMW>
     {
         private int Displacement;
         private string Type;
@@ -43,32 +33,23 @@ namespace Factory
             Displacement = litres;
             Type = type;
         }
-        public override string GetProviderType()
-        {
-            return "BMW";
-        }
-        public override Vehicle CreateObject()
+        public BMW CreateObject()
         {
             BMW newBMW = new BMW(Displacement, Type);
             return newBMW;
         }
     }
-    class ZeppelinProvider : Provider
+    class ZeppelinProvider : IFactoryProvider<Zeppelin>
     {
         private String ShellType;
         public ZeppelinProvider(string Type)
         {
             ShellType = Type;
         }
-        public override string GetProviderType()
-        {
-            return "Zeppelin";
-        }
-        public override Vehicle CreateObject()
+        public Zeppelin CreateObject()
         {
             Zeppelin newZeppelin = new Zeppelin(ShellType);
             return newZeppelin;
         }
-
     }
 }

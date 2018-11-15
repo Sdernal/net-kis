@@ -7,67 +7,45 @@ using System.Threading.Tasks;
 namespace Factory
 {
     class Factory
-    {
-        private CarProvider CProvider;
-        private BMWProvider BProvider;
-        private ZeppelinProvider ZProvider;
+    { 
+        private List<IFactoryProvider<IMovable>> Providers;
 
-        public void AddProvider(Provider NewProvider)
+        public Factory()
         {
-            string type = NewProvider.GetProviderType();
-            if (type == "Car")
-            {
-                CProvider = (CarProvider)NewProvider;
-            }
-            else if (type == "BMW")
-            {
-                BProvider = (BMWProvider)NewProvider;
-            }
-            else if (type == "Zeppelin")
-            {
-                ZProvider = (ZeppelinProvider)NewProvider;
-            }
-            else
-            {
-                throw new Exception("Wrong Provider!");
-            }
+            Providers = new List<IFactoryProvider<IMovable>>();
+        }
 
+        public void AddProvider(IFactoryProvider<IMovable> NewProvider)
+        {
+            Providers.Add(NewProvider);
         }
         
-        public Provider GetProvider<T>() where T: Provider
+        public T GetProvider<T>() where T: class, IFactoryProvider<IMovable>
         {
-            string type = typeof(T).Name;
-            if (type == "CarProvider")
+            T Provider = null;
+            foreach (IFactoryProvider<IMovable> provider in Providers)
             {
-                return CProvider;
+                if ((Provider = provider as T) != null)
+                {
+                    break;
+                }
             }
-            else if (type == "BMWProvider")
-            {
-                return BProvider;
-            }
-            else if (type == "ZeppelinProvider")
-            {
-                return ZProvider;
-            }
-            else
-            {
-                throw new Exception("Wrong Provider!");
-            }
+            return Provider;
         }
     }
     static class FactoryExtensions
     {
         public static Car CreateCar(this Factory F)
         {
-            return (Car)F.GetProvider<CarProvider>().CreateObject();
+            return F.GetProvider<CarProvider>().CreateObject();
         }
         public static BMW CreateBMW(this Factory F)
         {
-            return (BMW)F.GetProvider<BMWProvider>().CreateObject();
+            return F.GetProvider<BMWProvider>().CreateObject();
         }
         public static Zeppelin CreateZeppelin(this Factory F)
         {
-            return (Zeppelin)F.GetProvider<ZeppelinProvider>().CreateObject();
+            return F.GetProvider<ZeppelinProvider>().CreateObject();
         }
     }
 }
