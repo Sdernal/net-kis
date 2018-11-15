@@ -32,6 +32,12 @@ namespace Factory
             // Можно явно проверять при добавлении или затирать старый
             // Также не помешает удаление провайдера для его последующей замены
 
+            universalFactory.RemoveProvider<TruckProvider>();
+            Truck invalid = universalFactory.CreateTruck();
+            if (invalid == null) {
+                Console.WriteLine($"Missing provider, null created");
+            }
+
             Console.ReadKey();
         }
     }

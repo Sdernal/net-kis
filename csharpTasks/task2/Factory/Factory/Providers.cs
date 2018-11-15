@@ -22,7 +22,8 @@ namespace Factory
 
     static class CarProviderFactoryExtension {
         public static Car CreateCar(this TransportFactory factory) {
-            return factory.GetProvider<CarProvider>().CreateObject();
+            CarProvider provider = factory.GetProvider<CarProvider>();
+            return provider != null ? provider.CreateObject() : null;
         }
     }
 
@@ -44,7 +45,8 @@ namespace Factory
 
     static class TruckProviderFactoryExtension {
         public static Truck CreateTruck(this TransportFactory factory) {
-            return factory.GetProvider<TruckProvider>().CreateObject();
+            TruckProvider provider = factory.GetProvider<TruckProvider>();
+            return provider != null ? provider.CreateObject() : null;
         }
     }
 
@@ -64,7 +66,8 @@ namespace Factory
 
     static class AircraftProviderFactoryExtension {
         public static Aircraft CreateAircraft(this TransportFactory factory) {
-            return factory.GetProvider<AircraftProvider>().CreateObject();
+            AircraftProvider provider = factory.GetProvider<AircraftProvider>();
+            return provider != null ? provider.CreateObject() : null;
         }
     }
 }

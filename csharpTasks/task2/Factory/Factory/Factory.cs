@@ -8,6 +8,10 @@ namespace Factory {
     class TransportFactory {
         private List<IFactoryProvider<Transport>> providers_;
 
+        public TransportFactory() {
+            providers_ = new List<IFactoryProvider<Transport>>();
+        }
+
         public void AddProvider(IFactoryProvider<Transport> Provider) {
             for (int i = 0; i < providers_.Count(); ++i) {
                 if (providers_[i].GetType().FullName == Provider.GetType().FullName) {
