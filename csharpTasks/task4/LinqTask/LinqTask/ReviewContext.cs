@@ -20,37 +20,49 @@ namespace LinqTask
         // Получение объектов отзывов у конкретного пользователя
         public IEnumerable<Review> GetUserReviews(int userId)
         {
-            throw new NotImplementedException();
+            return from rw in this.reviews
+                   where rw.UserId == userId
+                   select rw;
         }
 
         // Оценивал ли кто-нибудь фильм
         public bool IsMovieReviewed(string movieName)
         {
-            throw new NotImplementedException();
+            return this.reviews.Any(rw => rw.Movie == movieName);
         }
 
         // Получить общие фильмы у двух пользователей
         public IEnumerable<string> CompareUsers(int user1, int user2)
         {
-            throw new NotImplementedException();
+            return from rw1 in this.GetUserReviews(user1)
+                   join rw2 in this.GetUserReviews(user2) on rw1.Movie equals rw2.Movie
+                   select rw1.Movie;
+
         }
 
         // Получить "любимые" фильмы пользователя (оценка которых больше некоторого значения), упорядоченные по оценке
         public IEnumerable<string> GetFavouritesResources(int userId, int minimalMark = 5)
         {
-            throw new NotImplementedException();
+            return from rw in this.reviews
+                   where rw.UserId == userId && rw.Mark > minimalMark
+                   orderby rw.Mark
+                   select rw.Movie;
         }
 
         // Получить сумму четных оценок пользователя
         public int GetUserEvenSumMarks(int userId)
         {
-            throw new NotImplementedException();
+            return (from rw in this.reviews
+                    where rw.UserId == userId && rw.Mark % 2 == 0
+                    select rw.Mark).Sum();
         }
 
         // Получить среднюю оценку для каждого фильма
         public IEnumerable<(string, double)> GetMoviesMeanMark()
         {
-            throw new NotImplementedException();
+            return from rw in this.reviews
+                   group rw by rw.Movie into g
+                   select (g.Key, (from rw in g select rw.Mark).Average());
         }    
     }
 }
