@@ -41,7 +41,8 @@ namespace LinqTask
         // Получить "любимые" фильмы пользователя (оценка которых больше некоторого значения), упорядоченные по оценке
         public IEnumerable<string> GetFavouritesResources(int userId, int minimalMark = 5)
         {
-            return reviews_.Where(review => review.UserId == userId && review.Mark > minimalMark).Select(review => review.Movie);
+            return reviews_.Where(review => review.UserId == userId && review.Mark > minimalMark).OrderBy(review => review.Mark)
+                           .Select(review => review.Movie);
         }
 
         // Получить сумму четных оценок пользователя
