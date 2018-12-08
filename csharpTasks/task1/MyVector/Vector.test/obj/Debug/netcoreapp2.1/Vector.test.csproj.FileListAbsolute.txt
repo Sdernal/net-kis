@@ -1,0 +1,4 @@
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\Vector.test\obj\Debug\netcoreapp2.1\Vector.test.csprojAssemblyReference.cache
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\Vector.test\obj\Debug\netcoreapp2.1\Vector.test.csproj.CoreCompileInputs.cache
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\Vector.test\obj\Debug\netcoreapp2.1\Vector.test.AssemblyInfoInputs.cache
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\Vector.test\obj\Debug\netcoreapp2.1\Vector.test.AssemblyInfo.cs

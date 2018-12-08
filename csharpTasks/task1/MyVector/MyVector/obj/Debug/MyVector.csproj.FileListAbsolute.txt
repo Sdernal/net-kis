@@ -1,0 +1,7 @@
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\MyVector\bin\Debug\MyVector.exe.config
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\MyVector\bin\Debug\MyVector.exe
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\MyVector\bin\Debug\MyVector.pdb
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\MyVector\obj\Debug\MyVector.csproj.CoreCompileInputs.cache
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\MyVector\obj\Debug\MyVector.exe
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\MyVector\obj\Debug\MyVector.pdb
+C:\Users\nikan\Documents\GitHub\net-kis\csharpTasks\task1\MyVector\MyVector\obj\Debug\MyVector.csprojAssemblyReference.cache
