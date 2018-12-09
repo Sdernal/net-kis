@@ -22,28 +22,32 @@ namespace DelegatesApp
     {
         public Person[] People { get; set; }
 
-        public Person GetOne(Func<Person, bool> filter) {
-            try {
-                return People.Single(filter);
+        public Person GetOne(Func<Person, bool> predicate) {
+            foreach (Person person in People) {
+                if (predicate(person)) {
+                    return person;
+                }
             }
-            catch (InvalidOperationException) {
-                return null;
+            return null;
+        }
+
+        public IEnumerable<Person> GetAll(Func<Person, bool> predicate)
+        {
+            foreach (Person person in People) {
+                if (predicate(person)) {
+                    yield return person;
+                }
             }
         }
 
-        public IEnumerable<Person> GetAll(Func<Person, bool> filter)
+        public bool Contains(Func<Person, bool> predicate)
         {
-            try {
-                return People.Where(filter);
+            foreach (Person person in People) {
+                if (predicate(person)) {
+                    return true;
+                }
             }
-            catch (InvalidOperationException) {
-                return null;
-            }
-        }
-
-        public bool Contains(Func<Person, bool> filter)
-        {
-            return People.Any(filter);
+            return false;
         }
     }
 }
