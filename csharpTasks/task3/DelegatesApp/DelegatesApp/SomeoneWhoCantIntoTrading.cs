@@ -43,5 +43,11 @@ namespace DelegatesApp
                 market.Sell(args.Name, _bitcoins, ref _bitcoins, ref _money);
             }
         }
+
+        public override string ToString()
+        {
+            return $"Someone who can't into trading\nMoney: {_money}\n" +
+                   $"Bitcoins: {_bitcoins}";
+        }
     }
 }
