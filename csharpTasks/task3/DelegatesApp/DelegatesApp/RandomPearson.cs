@@ -44,8 +44,8 @@ namespace DelegatesApp
 
         public override string ToString()
         {
-            return $"Someone who can't into trading\nMoney: {_money}\n" +
-                   $"Bitcoins: {_bitcoins}";
+            return $"Random pearson\n Money: {_money}\n " +
+                   $"Bitcoins: {_bitcoins}\n";
         }
     }
 }
