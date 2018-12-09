@@ -26,7 +26,7 @@ namespace DelegatesApp
                 return;
             }
 
-            if (args.NewPrice > args.OldPrice)
+            if (args.NewPrice < 500)
             {
                 try
                 {
@@ -36,7 +36,7 @@ namespace DelegatesApp
                 {
                 }
             }
-            else if (args.NewPrice < args.OldPrice)
+            else if (args.NewPrice > 500)
             {
                 market.Sell(args.Name, _bitcoins, ref _bitcoins, ref _money);
             }
