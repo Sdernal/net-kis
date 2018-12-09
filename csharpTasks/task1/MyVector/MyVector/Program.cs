@@ -68,7 +68,7 @@ namespace MyVector
 
             try
             {
-                (new Vector()).GetOrthogonal();
+                Vector.ZeroVector().GetOrthogonal();
             }
             catch (Exception e)
             {

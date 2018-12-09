@@ -40,6 +40,11 @@ namespace MyVector
             this.Y = Y;
         }
 
+        public static Vector ZeroVector()
+        {
+            return new Vector { X = 0, Y = 0 };
+        }
+
         /// <summary>
         /// Длина вектора
         /// </summary>
