@@ -35,20 +35,21 @@ namespace DelegatesApp
         }
     }
 
-    public class Broker2 : ISubscriber
+    public class DifferentlyOrientedBroker : ISubscriber
     {
         private int brokerMoney;
         private Dictionary<string, int> brokerShares;
         private Dictionary<string, int> prevShares;
-        private const double maxDiff = 50;
+        private double maxDiff;
 
         // устанавливаем деньги брокера        
         // Как хранить купленные акции - решайте сами
-        public Broker2(Market market, int money = 1000)
+        public DifferentlyOrientedBroker(Market market, int money = 1000, int maxDiff = 50)
         {
             brokerMoney = money;
             brokerShares = new Dictionary<string, int>();
             prevShares = new Dictionary<string, int>(market.Shares);
+            this.maxDiff = maxDiff;
         }
 
         // Тут логика такая: с биржи прилетает обновление. Брокер может либо продать акции, либо купить  
