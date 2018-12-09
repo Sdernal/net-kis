@@ -7,7 +7,7 @@ namespace LinqTask
 {
     // Контекст, который хранит список отзывов,
     // нужно реализовать методы-заглушки
-    class ReviewContext
+    public class ReviewContext
     {
         private IEnumerable<Review> reviews_;
 
