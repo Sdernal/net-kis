@@ -2,12 +2,12 @@ using System;
 
 namespace DelegatesApp
 {
-    public class RandomPearson : ISubscriber
+    public class RandomTrader : ISubscriber
     {
         private int _money;
         private int _bitcoins;
 
-        public RandomPearson(int money = 500)
+        public RandomTrader(int money = 500)
         {
             _money = money;
             _bitcoins = 0;
@@ -44,8 +44,7 @@ namespace DelegatesApp
 
         public override string ToString()
         {
-            return $"Random pearson\n Money: {_money}\n " +
-                   $"Bitcoins: {_bitcoins}\n";
+            return $"Random trader\n Money: {_money}\n Bitcoins: {_bitcoins}\n";
         }
     }
 }

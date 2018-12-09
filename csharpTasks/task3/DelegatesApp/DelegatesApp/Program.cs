@@ -11,18 +11,18 @@ namespace DelegatesApp
                 "Apple", "Google", "Bitcoin"
             });
             Broker broker = new Broker();
-            RandomPearson randomPerson = new RandomPearson();
+            RandomTrader randomTrader = new RandomTrader();
             market.AddSubscriber(broker);
-            market.AddSubscriber(randomPerson);
+            market.AddSubscriber(randomTrader);
 
             Console.WriteLine(broker);
-            Console.WriteLine(randomPerson);
+            Console.WriteLine(randomTrader);
             for (int i = 0; i < 20; i++)
             {
                 Console.WriteLine($"Trade #{i + 1}\n");
                 market.Trade();
                 Console.WriteLine(broker);
-                Console.WriteLine(randomPerson);
+                Console.WriteLine(randomTrader);
             }
 
 //            PersonContainer container = new PersonContainer();
