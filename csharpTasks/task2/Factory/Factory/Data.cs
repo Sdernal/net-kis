@@ -8,7 +8,7 @@ namespace Factory
 {
     class Car: IMovable
     {
-        protected int NumDoors;
+        public readonly int NumDoors;
         public Car()
         {
             NumDoors = 4;
@@ -24,8 +24,8 @@ namespace Factory
     }
     class BMW: Car
     {
-        private int Displacement;
-        private string Type;
+        public readonly int Displacement;
+        public readonly string Type;
         public BMW(int NumLitres, String TypeBMW)
         {
             Displacement = NumLitres;
@@ -38,7 +38,7 @@ namespace Factory
     }
     class Zeppelin: IMovable
     {
-        private String ShellType;
+        public readonly String ShellType;
         public Zeppelin(string Type)
         {
             ShellType = Type;

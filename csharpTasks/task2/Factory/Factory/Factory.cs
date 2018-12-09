@@ -27,25 +27,25 @@ namespace Factory
             {
                 if ((Provider = provider as T) != null)
                 {
-                    break;
+                    return Provider;
                 }
             }
-            return Provider;
+            return null;
         }
     }
     static class FactoryExtensions
     {
         public static Car CreateCar(this Factory F)
         {
-            return F.GetProvider<CarProvider>().CreateObject();
+            return F.GetProvider<CarProvider>()?.CreateObject();
         }
         public static BMW CreateBMW(this Factory F)
         {
-            return F.GetProvider<BMWProvider>().CreateObject();
+            return F.GetProvider<BMWProvider>()?.CreateObject();
         }
         public static Zeppelin CreateZeppelin(this Factory F)
         {
-            return F.GetProvider<ZeppelinProvider>().CreateObject();
+            return F.GetProvider<ZeppelinProvider>()?.CreateObject();
         }
     }
 }

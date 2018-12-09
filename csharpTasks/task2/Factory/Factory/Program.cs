@@ -24,9 +24,9 @@ namespace Factory
             // Грузовик это тоже машина
             Car car1 = universalFactory.CreateBMW();
             car1?.Move();
-            // Нужно уметь явно запрашивать провайдер
-            //Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject();
-            //car2?.Move();
+            //Нужно уметь явно запрашивать провайдер
+            Car car2 = universalFactory.GetProvider<BMWProvider>().CreateObject();
+            car2?.Move();
 
             // Насчет добавленных одинаковых провайдеров можно не беспокоиться, считаем, что один провайдер на тип
             // Можно явно проверять при добавлении или затирать старый
