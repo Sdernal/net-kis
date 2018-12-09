@@ -2,12 +2,12 @@ using System;
 
 namespace DelegatesApp
 {
-    public class SomeoneWhoCantIntoTrading : ISubscriber
+    public class RandomPearson : ISubscriber
     {
         private int _money;
         private int _bitcoins;
 
-        public SomeoneWhoCantIntoTrading(int money = 500)
+        public RandomPearson(int money = 500)
         {
             _money = money;
             _bitcoins = 0;
@@ -23,7 +23,6 @@ namespace DelegatesApp
 
             if (args.Name != "Bitcoin")
             {
-                Console.WriteLine("Not interesting.");
                 return;
             }
 
@@ -35,7 +34,6 @@ namespace DelegatesApp
                 }
                 catch (ArgumentException)
                 {
-                    Console.WriteLine("It's too expensive!");
                 }
             }
             else if (args.NewPrice < args.OldPrice)
