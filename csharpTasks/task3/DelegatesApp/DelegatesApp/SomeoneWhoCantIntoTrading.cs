@@ -29,13 +29,18 @@ namespace DelegatesApp
 
             if (args.NewPrice > args.OldPrice)
             {
-                market.Buy(args.Name, 1, ref _bitcoins, ref _money);
-                // TODO: exception
+                try
+                {
+                    market.Buy(args.Name, 1, ref _bitcoins, ref _money);
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("It's too expensive!");
+                }
             }
             else if (args.NewPrice < args.OldPrice)
             {
                 market.Sell(args.Name, _bitcoins, ref _bitcoins, ref _money);
-                // TODO: exception
             }
         }
     }

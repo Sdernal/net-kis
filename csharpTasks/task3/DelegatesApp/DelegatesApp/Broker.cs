@@ -34,11 +34,6 @@ namespace DelegatesApp
                 {
                     count = _shares[args.Name];
                 }
-                catch (ArgumentNullException)
-                {
-                    Console.WriteLine("It's empty!");
-                    return;
-                }
                 catch (KeyNotFoundException)
                 {
                     count = 0;
@@ -53,11 +48,6 @@ namespace DelegatesApp
                 try
                 {
                     count = _shares[args.Name];
-                }
-                catch (ArgumentNullException)
-                {
-                    Console.WriteLine("It's empty!");
-                    return;
                 }
                 catch (KeyNotFoundException)
                 {
