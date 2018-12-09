@@ -29,13 +29,11 @@ namespace DelegatesApp
         public event MarketDelegate Notify;
 
         public Dictionary<string, int> Shares { get; }
-        private List<ISubscriber> Subscribers;
         // Устанавливаем цены акций, хз как правильно они называются
         // В параметр передаем список имен акций
         public Market(string[] shares)
         {
             Shares = new Dictionary<string, int>();
-            Subscribers = new List<ISubscriber>();
             Random rnd = new Random();
             foreach (var share in shares)
             {
