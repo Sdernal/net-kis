@@ -38,9 +38,8 @@ namespace MyVector
         {
             this.X = X;
             this.Y = Y;
-
         }
-       
+
         /// <summary>
         /// Длина вектора
         /// </summary>
@@ -96,7 +95,7 @@ namespace MyVector
         /// <returns></returns>
         override public string ToString()
         {
-            return $"({this.X.ToString()}, {this.Y.ToString()})";
+            return $"({this.X}, {this.Y})";
         }
 
         #region Operators        
@@ -163,7 +162,7 @@ namespace MyVector
         {
             if (k == 0)
             {
-                throw new Exception("Can't divide Vector by zero");
+                throw new DivideByZeroException();
             }
             return new Vector(v.X / k, v.Y / k);
         }

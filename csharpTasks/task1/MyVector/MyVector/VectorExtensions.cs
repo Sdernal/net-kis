@@ -19,22 +19,15 @@ namespace MyVector
     // И не забыть про документацию и тесты
     public static class VectorExtensions
     {
-        private static double EPS_ = 1e-6;
-
-        public static void SetPrecision(double EPS)
-        {
-            EPS_ = EPS;
-        }
-
         /// <summary>
         /// Нормализовать вектор
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        public static Vector Normalize(this Vector v)
+        public static Vector Normalize(this Vector v, double eps=1e-6)
         {
             Vector result = new Vector();
-            if (v.Length() < EPS_)
+            if (v.Length() > eps)
             {
                 result = v / v.Length();
             }
@@ -44,13 +37,13 @@ namespace MyVector
         /// <summary>
         /// Получить угол между векторами в радианах
         /// </summary>
-        /// <param name="v"></param>
-        /// <param name="u"></param>
-        /// <param name="EPS_"></param>
+        /// <param name="v">Первый вектор</param>
+        /// <param name="u">Второй вектор</param>
+        /// <param name="eps">Точность сравнения</param>
         /// <returns></returns>
-        public static double GetAngleBetween(this Vector v, Vector u)
+        public static double GetAngleBetween(this Vector v, Vector u, double eps = 1e-6)
         {
-            if (Math.Abs(v.Length()) < EPS_ || Math.Abs(u.Length()) < EPS_)
+            if (Math.Abs(v.Length()) < eps || Math.Abs(u.Length()) < eps)
             {
                 throw new Exception("Can't get angle between vectors when argument is zero-vector");
             }
@@ -62,21 +55,21 @@ namespace MyVector
         /// </summary>
         /// <param name="v"></param>
         /// <param name="u"></param>
-        /// <param name="EPS_"></param>
+        /// <param name="eps"></param>
         /// <returns></returns>
-        public static VectorRelation GetRelation(this Vector v, Vector u)
+        public static VectorRelation GetRelation(this Vector v, Vector u, double eps = 1e-6)
         {
-            if (Math.Abs(v.Length()) < EPS_  || Math.Abs(u.Length()) < EPS_ )
+            if (Math.Abs(v.Length()) < eps  || Math.Abs(u.Length()) < eps )
             {
                 throw new ArgumentException("Can't get relation when argument is zero-vector");
             }
 
-            if (Math.Abs(v.DotProduct(u)) < EPS_)
+            if (Math.Abs(v.DotProduct(u)) < eps)
             {
                 return VectorRelation.Orthogonal;
             }
 
-            if (Math.Abs(v.CrossProduct(u)) < EPS_)
+            if (Math.Abs(v.CrossProduct(u)) < eps)
             {
                 return VectorRelation.Parallel;
             } else {
@@ -89,11 +82,11 @@ namespace MyVector
         /// </summary>
         /// <param name="v"></param>
         /// <param name="orientation"></param>
-        /// <param name="EPS_"></param>
+        /// <param name="eps"></param>
         /// <returns></returns>
-        public static Vector GetOrthogonal(this Vector v, bool orientation = true)
+        public static Vector GetOrthogonal(this Vector v, bool orientation = true, double eps = 1e-6)
         {
-            if (Math.Abs(v.Length()) < EPS_)
+            if (Math.Abs(v.Length()) < eps)
             {
                 throw new ArgumentException("Can't find orthogonal for zero-vector");
             }
