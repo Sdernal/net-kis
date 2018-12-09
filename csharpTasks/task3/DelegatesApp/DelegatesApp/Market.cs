@@ -40,7 +40,7 @@ namespace DelegatesApp
         public Market(string[] shares)
         {
             Shares = new Dictionary<string, int>();
-            random = new Random(23418);
+            random = new Random(70008);
             foreach (var share in shares)
             {
                 Shares.Add(share, random.Next(100, 1000));
