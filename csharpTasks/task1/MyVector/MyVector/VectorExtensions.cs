@@ -19,7 +19,11 @@ namespace MyVector
     // И не забыть про документацию и тесты
     public static class VectorExtensions
     {
-        // Нормализовать вектор
+        /// <summary>
+        /// Нормализовать вектор
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns>Normalized vector if v.Length() != 0, Vector(0, 0) otherwise</returns>
         public static Vector Normalize(this Vector v)
         {
             // не хочется писать сложные проверки с EPS
@@ -41,6 +45,12 @@ namespace MyVector
         /// <returns></returns>
         public static double GetAngleBetween(this Vector v, Vector u)
         {
+            if (v.Length() == 0) {
+                throw new Exception("Vector v is null vector");
+            }
+            if (u.Length() == 0) {
+                throw new Exception("Vector v is null vector");
+            }
             return Math.Atan2(v.CrossProduct(u), v.DotProduct(u));
         }
 
@@ -59,8 +69,16 @@ namespace MyVector
         }
 
         // Еденичный ортогональный вектор данному
+        /// <summary>
+        /// Единичный вектор, ортогональный данному
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public static Vector GetOrthogonal(this Vector v)
         {
+            if (v.Length() == 0) {
+                throw new Exception("V is null vector");
+            }
             return new Vector(-v.y, v.x) / v.Length();
         }
 

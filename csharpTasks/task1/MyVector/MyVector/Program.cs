@@ -38,6 +38,38 @@ namespace MyVector
             Console.WriteLine(delimeter);
 
             Console.WriteLine($"x.rotate(pi / 2): {x.Rotate(Math.PI / 2)}\ny / 2: {y / 2}");
+            Console.WriteLine(delimeter);
+
+            try {
+                x = x / 0;
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
+            Console.WriteLine(delimeter);
+
+            try {
+                x.GetAngleBetween(y - y);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
+            Console.WriteLine(delimeter);
+
+            try {
+                y.Add(-y).GetAngleBetween(x);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
+            Console.WriteLine(delimeter);
+
+            try {
+                y.Add(-y).GetOrthogonal();
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
 
             Console.ReadKey();
         }     

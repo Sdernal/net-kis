@@ -132,7 +132,7 @@ namespace MyVector
         public static Vector operator /(Vector v, double k)
         {
             if (k == 0) {
-                throw new DivideByZeroException();
+                throw new Exception("Divisor k is zero");
             }
             return new Vector(v.x / k, v.y / k);
         }
