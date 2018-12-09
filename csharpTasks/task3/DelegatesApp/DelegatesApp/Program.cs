@@ -25,17 +25,17 @@ namespace DelegatesApp
                 Console.WriteLine(randomTrader);
             }
 
-//            PersonContainer container = new PersonContainer();
-//            container.People = new Person[]
-//            {
-//                new Person {Name="John", Age=19},
-//                new Person {Name="Alice", Age=21}
-//            };
-//
-//            foreach (var p in container.GetAll(p => p.Age > 10))
-//            {
-//                Console.WriteLine(p.ToString());
-//            }
+            PersonContainer container = new PersonContainer();
+            container.People = new Person[]
+            {
+                new Person {Name = "John", Age = 19},
+                new Person {Name = "Alice", Age = 21}
+            };
+
+            foreach (var p in container.GetAll(p => p.Age > 10))
+            {
+                Console.WriteLine(p.ToString());
+            }
         }
     }
 }
