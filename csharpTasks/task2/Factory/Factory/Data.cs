@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Factory {
     abstract class Transport : IMovable {
-        protected string Name_;
+        public readonly string Name_;
 
         protected Transport(string Name) {
             Name_ = Name;
@@ -16,7 +16,7 @@ namespace Factory {
     }
 
     class Car : Transport {
-        protected int Wheels_;
+        public readonly int Wheels_;
 
         public Car(string Name, int Wheels) : base(Name) {
             Wheels_ = Wheels;
@@ -28,7 +28,7 @@ namespace Factory {
     }
 
     class Truck : Car {
-        private double Volume_;
+        public readonly double Volume_;
 
         public Truck(string Name, int Wheels, double Volume) : base(Name, Wheels) {
             Volume_ = Volume;
@@ -40,7 +40,7 @@ namespace Factory {
     }
 
     class Aircraft : Transport {
-        protected int Wings_;
+        public readonly int Wings_;
 
         public Aircraft(string Name, int Wings) : base(Name) {
             Wings_ = Wings;
