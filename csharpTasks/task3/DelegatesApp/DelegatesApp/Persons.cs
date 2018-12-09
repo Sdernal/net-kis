@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DelegatesApp
 {
@@ -23,17 +22,42 @@ namespace DelegatesApp
 
         public Person GetOne(Func<Person, bool> predicate)
         {
-            return People.FirstOrDefault(predicate);
+            foreach (var person in People)
+            {
+                if (predicate(person))
+                {
+                    return person;
+                }
+            }
+
+            return null;
         }
 
         public IEnumerable<Person> GetAll(Func<Person, bool> predicate)
         {
-            return People.Where(predicate);
+            var result = new List<Person>();
+            foreach (var person in People)
+            {
+                if (predicate(person))
+                {
+                    result.Add(person);
+                }
+            }
+
+            return result;
         }
 
         public bool Contains(Func<Person, bool> predicate)
         {
-            return People.Any(predicate);
+            foreach (var person in People)
+            {
+                if (predicate(person))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
