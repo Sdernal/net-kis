@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace DelegatesApp
 {
@@ -8,7 +7,8 @@ namespace DelegatesApp
         static void Main(string[] args)
         {
             Market market = new Market(new string[] { "Apple", "Google" });
-            market.AddSubscriber(new Broker());
+            market.AddSubscriber(new Bernoulli());
+            market.AddSubscriber(new Player(market));
             for (int i = 0; i < 10; i++) {
                 market.Trade();
             }
