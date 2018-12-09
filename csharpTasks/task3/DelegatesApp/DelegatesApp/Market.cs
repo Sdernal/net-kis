@@ -81,6 +81,8 @@ namespace DelegatesApp
         /// <param name="amount">Количество покупаемых акций</param>
         /// <param name="count">Ссылка на акции брокера</param>
         /// <param name="account">Ссылка на счет брокера</param>
+        /// <exception cref="ArgumentException">Выбрасывается, если передано
+        /// неправильное значение shareName и если не хватает денег</exception>
         public void Buy(string shareName, int amount,
             ref int count, ref int account)
         {
@@ -89,22 +91,19 @@ namespace DelegatesApp
             {
                 price = Shares[shareName];
             }
-            catch (ArgumentNullException)
+            catch (ArgumentNullException e)
             {
-                Console.WriteLine("It's empty, stupid!");
-                return;
+                throw new ArgumentException("Wrong share name", e);
             }
-            catch (KeyNotFoundException)
+            catch (KeyNotFoundException e)
             {
-                Console.WriteLine($"There is no share named \"{shareName}\"");
-                return;
+                throw new ArgumentException("Wrong share name", e);
             }
 
             var sum = price * amount;
             if (sum > account)
             {
-                Console.WriteLine("You don't have enough money!");
-                return;
+                throw new ArgumentException("Not enough money");
             }
 
             account -= sum;
@@ -120,21 +119,18 @@ namespace DelegatesApp
             {
                 price = Shares[shareName];
             }
-            catch (ArgumentNullException)
+            catch (ArgumentNullException e)
             {
-                Console.WriteLine("It's empty, stupid!");
-                return;
+                throw new ArgumentException("Wrong share name", e);
             }
-            catch (KeyNotFoundException)
+            catch (KeyNotFoundException e)
             {
-                Console.WriteLine($"There is no share named \"{shareName}\"");
-                return;
+                throw new ArgumentException("Wrong share name", e);
             }
 
             if (count < amount)
             {
-                Console.WriteLine("You don't have enough shares!");
-                return;
+                throw new ArgumentException("Not enough shares");
             }
 
             count -= amount;
