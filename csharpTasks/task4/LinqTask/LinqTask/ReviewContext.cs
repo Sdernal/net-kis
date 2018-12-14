@@ -12,7 +12,7 @@ namespace LinqTask
         // Инициализируется перечислением отзывов
         public ReviewContext(IEnumerable<Review> visitings)
         {
-            this.reviews = visitings;
+            reviews = visitings;
         }
 
         // Получение объектов отзывов у конкретного пользователя
