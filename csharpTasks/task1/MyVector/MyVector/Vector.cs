@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyVector
 {
@@ -23,36 +19,85 @@ namespace MyVector
         private void Foo()
         {
 
-        }        
+        }
         */
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="X">горизонтальная составляющая</param>
+        /// <param name="Y">вертикальная составляющая</param>
+        public Vector(double X, double Y)
+        {
+            _x = X;
+            _y = Y;
+        }
+
+        /// <summary>
+        /// горизонтальная составляющая
+        /// </summary>
+        public double X
+        {
+            get => _x;
+        }
+
+        /// <summary>
+        /// вертикальная составляющая
+        /// </summary>
+        public double Y
+        {
+            get => _y;
+        }
+
+        /// <summary>
+        /// длина вектора 
+        /// </summary>
         public double Length()
         {
-            throw new NotImplementedException();
+            return Math.Sqrt(_x * _x + _y * _y);
         }
 
+        /// <summary>
+        /// добавление вектора
+        /// </summary>
         public Vector Add(Vector v)
         {
-            throw new NotImplementedException();
+            _x += v._x;
+            _y += v._y;
+            return this;
         }
 
+        /// <summary>
+        /// домножение на число
+        /// </summary>
         public Vector Scale(double k)
         {
-            throw new NotImplementedException();
+            _x *= k;
+            _y *= k;
+            return this;
         }
 
+        /// <summary>
+        /// скалярное произведение
+        /// </summary>
         public double DotProduct(Vector v)
         {
-            throw new NotImplementedException();
+            return _x * v._x + _y * v._y;
         }
 
+        /// <summary>
+        /// векторное произведение с учетом знака
+        /// </summary>
         public double CrossProduct(Vector v)
         {
-            throw new NotImplementedException();
+            return _x * v._y - _y * v._x;
         }
 
+        /// <summary>
+        /// переопределенный ToString()
+        /// </summary>
         override public string ToString()
         {
-            throw new NotImplementedException();
+            return $"({_x},{_y})";
         }
 
         #region Operators        
@@ -62,10 +107,65 @@ namespace MyVector
         - +v, -v 
         */
         // Такая семантика у операторов в C#
-        public static Vector operator+ (Vector v, Vector u)
+
+        /// <summary>
+        /// сумма векторов
+        /// </summary>
+        public static Vector operator +(Vector v, Vector u)
         {
-            throw new NotImplementedException();
-        }        
+            return new Vector(v._x + u._x, v._y + u._y);
+        }
+
+        /// <summary>
+        /// разность векторов
+        /// </summary>
+        public static Vector operator -(Vector v, Vector u)
+        {
+            return new Vector(v._x - u._x, v._y - u._y);
+        }
+
+        /// <summary>
+        /// умножение на число
+        /// </summary>
+        public static Vector operator *(Vector v, double k)
+        {
+            return new Vector(v._x * k, v._y * k);
+        }
+
+        /// <summary>
+        /// умножение на число в другом порядке
+        /// </summary>
+        public static Vector operator *(double k, Vector v)
+        {
+            return v * k;
+        }
+
+        /// <summary>
+        /// деление на число
+        /// </summary>
+        public static Vector operator /(Vector v, double k)
+        {
+            return new Vector(v._x / k, v._y / k);
+        }
+
+        /// <summary>
+        /// унарный минус
+        /// </summary>
+        public static Vector operator -(Vector v)
+        {
+            return new Vector(-v._x, -v._y);
+        }
+
+        /// <summary>
+        /// унарный плюс
+        /// </summary>
+        public static Vector operator +(Vector v)
+        {
+            return new Vector(v._x, v._y);
+        }
         #endregion
+
+        private double _x;
+        private double _y;
     }
 }

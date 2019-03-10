@@ -20,33 +20,54 @@ namespace MyVector
     public static class VectorExtensions
     {
         // Нормализовать вектор
+        /// <summary>
+        /// нормализованный вектор, исходный вектор не меняется
+        /// </summary>
         public static Vector Normalize(this Vector v)
         {
-            throw new NotImplementedException();
+            return v / v.Length();
         }
 
         // Получить угол между векторами в радианах
+        /// <summary>
+        /// угол между векторами
+        /// </summary>
         public static double GetAngleBetween(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            return Math.Acos(v.DotProduct(u) / v.Length() / u.Length());
         }
 
         // Получить отношение векторов: параллельны, перпендикулярны, остальное
+        /// <summary>
+        /// отношение между векторами
+        /// </summary>
+        /// <returns>VectorRelation (Parallel, General, Orthogonal)</returns>
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            VectorRelation relation = VectorRelation.General;
+            if (v.X * u.Y == v.Y * u.X) relation = VectorRelation.Parallel;
+            if (v.DotProduct(u) == 0) relation = VectorRelation.Orthogonal;
+            return relation;
         }
 
         // Еденичный ортогональный вектор данному
+        /// <summary>
+        /// вектор ортогональный данному
+        /// </summary>
         public static Vector GetOrthogonal(this Vector v)
         {
-            throw new NotImplementedException();
+            return new Vector(-v.Y, v.X) / v.Length();
         }
 
         // Повернуть вектор на заданный угол
+        /// <summary>
+        /// поворот на заднный угол
+        /// </summary>
         public static Vector Rotate(this Vector v, double angle)
         {
-            throw new NotImplementedException();
+            double cs = Math.Cos(angle);
+            double sn = Math.Sin(angle);
+            return new Vector(cs * v.X - sn * v.Y, cs * v.Y + sn * v.X);
         }
     }
 }
