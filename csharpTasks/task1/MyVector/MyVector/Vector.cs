@@ -61,9 +61,7 @@ namespace MyVector
         /// </summary>
         public Vector Add(Vector v)
         {
-            _x += v._x;
-            _y += v._y;
-            return this;
+            return new Vector(_x+v._x, _y + v._y);
         }
 
         /// <summary>
@@ -71,9 +69,7 @@ namespace MyVector
         /// </summary>
         public Vector Scale(double k)
         {
-            _x *= k;
-            _y *= k;
-            return this;
+            return new Vector(_x * k, _y * k);
         }
 
         /// <summary>
