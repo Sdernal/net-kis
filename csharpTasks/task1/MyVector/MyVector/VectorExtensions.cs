@@ -25,6 +25,7 @@ namespace MyVector
         /// </summary>
         public static Vector Normalize(this Vector v)
         {
+            if (v.Length() == 0) throw new ArgumentException();
             return v / v.Length();
         }
 
@@ -34,6 +35,7 @@ namespace MyVector
         /// </summary>
         public static double GetAngleBetween(this Vector v, Vector u)
         {
+            if (v.Length() == 0 || u.Length() == 0) throw new ArgumentException();
             return Math.Acos(v.DotProduct(u) / v.Length() / u.Length());
         }
 
@@ -56,6 +58,7 @@ namespace MyVector
         /// </summary>
         public static Vector GetOrthogonal(this Vector v)
         {
+            if (v.Length() == 0) throw new ArgumentException();
             return new Vector(-v.Y, v.X) / v.Length();
         }
 

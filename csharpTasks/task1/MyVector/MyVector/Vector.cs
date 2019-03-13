@@ -141,6 +141,7 @@ namespace MyVector
         /// </summary>
         public static Vector operator /(Vector v, double k)
         {
+            if (k == 0) throw new ArgumentException();
             return new Vector(v._x / k, v._y / k);
         }
 

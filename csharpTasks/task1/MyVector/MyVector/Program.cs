@@ -28,6 +28,15 @@ namespace MyVector
             Console.WriteLine(v1 * k);
             Console.WriteLine(k * v1);
             Console.WriteLine(v1 / k);
+            k = 0;
+            try
+            {
+                Console.WriteLine(v1 / k);
+            }
+            catch(ArgumentException)
+            {
+                Console.WriteLine("exception");
+            }
             Console.WriteLine(+v1);
             Console.WriteLine(-v1);
 
@@ -36,15 +45,40 @@ namespace MyVector
             var u2 = new Vector(-4, 2);
             var u3 = new Vector(-5, -10);
             var u4 = new Vector(1, 1);
+            var u0 = new Vector(0, 0);
             Console.WriteLine(u1.Normalize());
             Console.WriteLine(u1.Normalize().Length());
+            try
+            {
+                Console.WriteLine(u0.Normalize());
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("exception");
+            }
             Console.WriteLine(u1.GetAngleBetween(u2));
             Console.WriteLine(u1.GetAngleBetween(u1));
+            try
+            {
+                Console.WriteLine(u0.GetAngleBetween(u2));
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("exception");
+            }
             Console.WriteLine(u1.GetRelation(u2));
             Console.WriteLine(u1.GetRelation(u3));
             Console.WriteLine(u1.GetRelation(u4));
             Console.WriteLine(u1.GetOrthogonal());
             Console.WriteLine(u1.GetOrthogonal().Length());
+            try
+            {
+                Console.WriteLine(u0.GetOrthogonal());
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("exception");
+            }
             var angle = Math.PI;
             Console.WriteLine(u1.Rotate(angle));
         }     
