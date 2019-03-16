@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Factory.Providers;
+using Factory.Vehicles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +29,7 @@ namespace Factory
             // Нужно уметь явно запрашивать провайдер
             Car car2 = universalFactory.GetProvider<TruckProvider>().CreateObject();
             car2?.Move();
-            
+
             // Насчет добавленных одинаковых провайдеров можно не беспокоиться, считаем, что один провайдер на тип
             // Можно явно проверять при добавлении или затирать старый
             // Также не помешает удаление провайдера для его последующей замены

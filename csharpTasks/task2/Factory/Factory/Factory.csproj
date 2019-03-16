@@ -36,12 +36,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data.cs" />
     <Compile Include="Factory.cs" />
-    <Compile Include="IFactoryProvider.cs" />
-    <Compile Include="IMovable.cs" />
+    <Compile Include="Providers\IProvider.cs" />
+    <Compile Include="Vehicles\IMovable.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Providers.cs" />
+    <Compile Include="Providers\AirplaneProvider.cs" />
+    <Compile Include="Providers\CarProvider.cs" />
+    <Compile Include="Providers\TruckProvider.cs" />
+    <Compile Include="Vehicles\Airplane.cs" />
+    <Compile Include="Vehicles\Car.cs" />
+    <Compile Include="Vehicles\Truck.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
