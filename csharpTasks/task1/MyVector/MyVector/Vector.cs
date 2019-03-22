@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,34 +25,54 @@ namespace MyVector
 
         }        
         */
+        /// <summary>
+        /// Поля стуктуры гориз и вертикальная состовляющая
+        /// </summary>
+        public double X;
+        public double Y;
+        /// <summary>
+        /// Констркутор с параметрами для стукутуры
+        /// </summary>
+        /// <param name="x">горизонтальная состовляющая</param>
+        /// <param name="y">вертикальная состовляющая</param>
+        public Vector(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+
         public double Length()
         {
-            throw new NotImplementedException();
+            return Math.Sqrt(X*X + Y*Y);
         }
 
         public Vector Add(Vector v)
         {
-            throw new NotImplementedException();
+            this.X += v.X;
+            this.Y += v.Y;
+            return this;
         }
 
         public Vector Scale(double k)
         {
-            throw new NotImplementedException();
+            this.X *= k;
+            this.Y *= k;
+            return this;
         }
 
         public double DotProduct(Vector v)
         {
-            throw new NotImplementedException();
+            return this.X * v.X + this.Y * v.Y;
         }
 
         public double CrossProduct(Vector v)
         {
-            throw new NotImplementedException();
+            return this.X * v.Y - this.Y * v.X;
         }
 
         override public string ToString()
         {
-            throw new NotImplementedException();
+            return $"({this.X};{this.Y})";
         }
 
         #region Operators        
@@ -62,10 +82,42 @@ namespace MyVector
         - +v, -v 
         */
         // Такая семантика у операторов в C#
+        /// <summary>
+        /// Обратим внимание, что структура это не ссылочный тип, поэтому при создании нового вектора происходит копирование
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="u"></param>
+        /// <returns></returns>
         public static Vector operator+ (Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            Vector new_vector = v;
+            return new_vector.Add(u);
         }        
+        public static Vector operator-(Vector v, Vector u)
+        {
+            return new Vector(v.X - u.X, v.Y - u.Y);
+        }
+        public static Vector operator*(Vector v, double k)
+        {
+            return new Vector(v.X * k, v.Y * k);
+        }
+        public static Vector operator*(double k, Vector v)
+        {
+            return v * k;
+        }
+        public static Vector operator/(Vector v, double k)
+        {
+            if (k == 0) throw new ArgumentException();
+            return v * (1/k);
+        }
+        public static Vector operator+(Vector v)
+        {
+            return v;
+        } 
+        public static Vector operator-(Vector v)
+        {
+            return v.Scale(-1); 
+        }
         #endregion
     }
 }
