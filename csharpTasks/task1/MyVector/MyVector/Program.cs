@@ -10,8 +10,12 @@ namespace MyVector
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello world!");           
-        }     
-        
+            MyVector.Vector a1 = new MyVector.Vector(1, 2);
+            Console.WriteLine(a1.ToString());
+            int a = -1;
+            Console.WriteLine(+a);
+
+        }
+
     }
 }
