@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,33 +20,70 @@ namespace MyVector
     public static class VectorExtensions
     {
         // Нормализовать вектор
+        /// <summary>
+        /// Нормализуем вектор.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <returns></returns>
         public static Vector Normalize(this Vector v)
         {
-            throw new NotImplementedException();
+            if (v.Length() == 0) throw new ArgumentException();
+            return v / v.Length();
         }
 
         // Получить угол между векторами в радианах
+        /// <summary>
+        /// Возвращает угол между векторами в радианах.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <param name="u">вектор</param>
+        /// <returns></returns>
         public static double GetAngleBetween(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            if(v.Length() == 0 || u.Length() == 0) throw new ArgumentException();
+            return Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
         }
 
         // Получить отношение векторов: параллельны, перпендикулярны, остальное
+        /// <summary>
+        /// Отношение векторов.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <param name="u">вектор</param>
+        /// <returns></returns>
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
-            throw new NotImplementedException();
+            VectorRelation relation = VectorRelation.General;
+            Vector tmp = v;
+            if (tmp.CrossProduct(u) == 0)
+                relation = VectorRelation.Parallel;
+            else if (tmp.DotProduct(u) == 0)
+                relation = VectorRelation.Orthogonal;
+            return relation;
         }
 
         // Еденичный ортогональный вектор данному
+        /// <summary>
+        /// Еденичный ортогональный вектор данному
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <returns></returns>
         public static Vector GetOrthogonal(this Vector v)
         {
-            throw new NotImplementedException();
+            if (v.Length() == 0) throw new ArgumentException();
+            return new Vector(-v.y, v.x) / v.Length();
         }
 
         // Повернуть вектор на заданный угол
+        /// <summary>
+        /// Поворот вектора на угол.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <param name="angle">угол</param>
+        /// <returns></returns>
         public static Vector Rotate(this Vector v, double angle)
         {
-            throw new NotImplementedException();
+            return new Vector(v.x * Math.Cos(angle) - v.y * Math.Sin(angle), v.x * Math.Sin(angle) + v.y * Math.Cos(angle));
         }
     }
 }
