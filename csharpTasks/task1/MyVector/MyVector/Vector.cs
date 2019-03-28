@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,34 +25,72 @@ namespace MyVector
 
         }        
         */
+        public double x, y;
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="X">координата по горизонтали </param>
+        /// <param name="Y">координата по вертикали </param>
+        public Vector(double X, double Y)
+        {
+            x = X;
+            y = Y;
+        }
+        /// <summary>
+        /// Длина вектора.
+        /// </summary>
+        /// <returns></returns>
         public double Length()
         {
-            throw new NotImplementedException();
+            return Math.Sqrt(x * x + y * y);
         }
-
+        /// <summary>
+        /// Прибавление вектора к вектору.
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public Vector Add(Vector v)
         {
-            throw new NotImplementedException();
+            x += v.x;
+            y += v.y;
+            return this;
         }
-
+        /// <summary>
+        /// Умножение вектора на число.
+        /// </summary>
+        /// <param name="k">число, на которое умножаем</param>
+        /// <returns></returns>
         public Vector Scale(double k)
         {
-            throw new NotImplementedException();
+            x *= k;
+            y *= k;
+            return this;
         }
-
+        /// <summary>
+        /// Скалярное произведение векторов
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <returns></returns>
         public double DotProduct(Vector v)
         {
-            throw new NotImplementedException();
+            return x * v.x + y * v.y;
         }
-
+        /// <summary>
+        /// Векторное произведение.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <returns></returns>
         public double CrossProduct(Vector v)
         {
-            throw new NotImplementedException();
+            return x * v.y - y * v.x;
         }
-
+        /// <summary>
+        /// Приведение к строке.
+        /// </summary>
+        /// <returns></returns>
         override public string ToString()
         {
-            throw new NotImplementedException();
+            return $"({x},{y})";
         }
 
         #region Operators        
@@ -62,10 +100,81 @@ namespace MyVector
         - +v, -v 
         */
         // Такая семантика у операторов в C#
-        public static Vector operator+ (Vector v, Vector u)
+        /// <summary>
+        /// Оператор сложения векторов.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <param name="u">вектор</param>
+        /// <returns></returns>
+        public static Vector operator +(Vector v, Vector u)
         {
-            throw new NotImplementedException();
-        }        
+            Vector result = v;
+            return result.Add(u);
+        }
+        /// <summary>
+        /// Оператор разности векторов.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <param name="u">вектор</param>
+        /// <returns></returns>
+        public static Vector operator -(Vector v, Vector u)
+        {
+            Vector result = v;
+            Vector result2 = u;
+            return result.Add(result2.Scale(-1));
+        }
+        /// <summary>
+        /// Оператор умножения вектора на число.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <param name="k">число</param>
+        /// <returns></returns>
+        public static Vector operator *(Vector v, double k)
+        {
+            Vector result = v;
+            return result.Scale(k);
+        }
+        /// <summary>
+        /// Оператор умножения вектора на число.
+        /// </summary>
+        /// <param name="k">число</param>
+        /// <param name="v">вектор</param>
+        /// <returns></returns>
+        public static Vector operator *(double k, Vector v)
+        {
+            return v * k;
+        }
+        /// <summary>
+        /// Оператор деления числа на вектор.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <param name="k">число</param>
+        /// <returns></returns>
+        public static Vector operator /(Vector v, double k)
+        {
+            if (k == 0) throw new ArgumentException();
+            return v.Scale(1 / k);
+        }
+        /// <summary>
+        /// Оператор плюс.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <returns></returns>
+        public static Vector operator +(Vector v)
+        {
+            return v;
+        }
+        /// <summary>
+        /// Оператор минус.
+        /// </summary>
+        /// <param name="v">вектор</param>
+        /// <returns></returns>
+        public static Vector operator -(Vector v)
+        {
+            return v.Scale(-1);
+        }
+
+
         #endregion
     }
 }
