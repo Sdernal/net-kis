@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DelegatesApp
@@ -12,7 +13,9 @@ namespace DelegatesApp
 
     public class MarketEventArgs
     {
-        /*Здесь можно добавить что угодно, цену, название компании и т.п.*/
+        public string Name { get; set; }
+        public int OldPrice { get; set; }
+        public int NewPrice { get; set; }
     }
 
     // Биржа, торгующая акциями
@@ -21,7 +24,7 @@ namespace DelegatesApp
         public delegate void MarketDelegate(object sender, MarketEventArgs args);
         public event MarketDelegate Notify;
 
-        public Dictionary<string, int> Shares { get; }
+        public Dictionary<string, int> Shares { get; private set; }
         // Устанавливаем цены акций, хз как правильно они называются
         // В параметр передаем список имен акций
         public Market(string[] shares)
@@ -33,10 +36,11 @@ namespace DelegatesApp
                 Shares.Add(share, rnd.Next(100, 1000));
             }
         }
+
         // Добавляет подписчика
         public void AddSubscriber(ISubscriber sub)
         {
-            throw new NotImplementedException();
+            Notify += sub.Notified;
         }
 
         // Запускает ход торгов (устанавливает цену акциям) и уведомляет подписчиков
@@ -44,7 +48,18 @@ namespace DelegatesApp
         {
             // При реализации можно взять рандомную акцию, выставить у неё цену (тоже рандомно в некоторых пределах)
             // и проинформировать подписчиков
-            throw new NotImplementedException();
+            var rand = new Random();
+            var newPrice = rand.Next(100, 1000);
+            var key = Shares.Keys.ElementAt(rand.Next(0, Shares.Keys.Count));
+            var oldPrice = Shares[key];
+            Shares[key] = newPrice;
+            Notify?.Invoke(this,
+                new MarketEventArgs
+                {
+                    Name = key,
+                    OldPrice = oldPrice,
+                    NewPrice = newPrice
+                });
         }
         
         /// <summary>
@@ -55,14 +70,15 @@ namespace DelegatesApp
         /// <param name="account">Ссылка на счет брокера</param>
         public void Buy(string shareName, ref int count, ref int account)
         {
-            // Покупка акций 
-            // Биржа сама должна из одного мметса вычесть, в другое прибавить
+            account -= Shares[shareName];
+            count += 1;
         }
 
 
         public void Sell(string shareName, ref int count, ref int account)
         {
-            // Продажа 
+            count -= 1;
+            account += Shares[shareName];
         }
     }
 }

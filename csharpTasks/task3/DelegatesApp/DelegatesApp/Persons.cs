@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DelegatesApp
@@ -20,19 +21,36 @@ namespace DelegatesApp
     {
         public Person[] People { get; set; }
         
-        public Person GetOne()
+        public Person GetOne(Predicate<Person> predicate)
         {
-            throw new NotImplementedException();
+            foreach (var people in People)
+            {
+                if (predicate(people))
+                {
+                    return people;
+                }
+            }
+            return null;
         }
 
-        public IEnumerable<Person> GetAll()
+        public IEnumerable<Person> GetAll(Predicate<Person> predicate)
         {
-            throw new NotImplementedException();
+            foreach (var people in People)
+            {
+                if (predicate(people))
+                {
+                    yield return people;
+                }
+            }
         }
 
-        public bool Contains()
+        public bool Contains(Predicate<Person> predicate)
         {
-            throw new NotImplementedException();
+            foreach (var people in People)
+            {
+                if (predicate(people)) return true;
+            }
+            return false;
         }
     }
 }
