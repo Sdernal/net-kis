@@ -7,7 +7,7 @@ namespace LinqTask
 {
     // Контекст, который хранит список отзывов,
     // нужно реализовать методы-заглушки
-    class ReviewContext
+    public class ReviewContext
     {
         private IEnumerable<Review> reviews;
 
@@ -20,37 +20,50 @@ namespace LinqTask
         // Получение объектов отзывов у конкретного пользователя
         public IEnumerable<Review> GetUserReviews(int userId)
         {
-            throw new NotImplementedException();
+            return reviews.Where(r => r.UserId == userId);
         }
 
         // Оценивал ли кто-нибудь фильм
         public bool IsMovieReviewed(string movieName)
         {
-            throw new NotImplementedException();
+            return reviews.Any(r => r.Movie == movieName);
         }
 
         // Получить общие фильмы у двух пользователей
         public IEnumerable<string> CompareUsers(int user1, int user2)
         {
-            throw new NotImplementedException();
+            return reviews
+                .Where(r => r.UserId == user1)
+                .Select(r => r.Movie)
+                .Intersect(reviews
+                .Where(r => r.UserId == user2)
+                .Select(r => r.Movie));
         }
 
         // Получить "любимые" фильмы пользователя (оценка которых больше некоторого значения), упорядоченные по оценке
-        public IEnumerable<string> GetFavouritesResources(int userId, int minimalMark = 5)
+        public IEnumerable<string> 
+            GetFavouritesResources(int userId, int minimalMark = 5)
         {
-            throw new NotImplementedException();
+            return reviews
+                .Where(r => r.UserId == userId && r.Mark > minimalMark)
+                .OrderBy(r => r.Mark)
+                .Select(r => r.Movie);
         }
 
         // Получить сумму четных оценок пользователя
         public int GetUserEvenSumMarks(int userId)
         {
-            throw new NotImplementedException();
+            return reviews
+                .Where(r => r.UserId == userId && r.Mark % 2 == 0)
+                .Sum(r => r.Mark);
         }
 
         // Получить среднюю оценку для каждого фильма
         public IEnumerable<(string, double)> GetMoviesMeanMark()
         {
-            throw new NotImplementedException();
+            return reviews
+                .GroupBy(r => r.Movie)
+                .Select(g => (g.Key, g.Average(r => r.Mark) ));
         }    
     }
 }

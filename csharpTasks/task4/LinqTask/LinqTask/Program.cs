@@ -30,7 +30,7 @@ namespace LinqTask
             Debug.Assert(reviewContext.GetUserEvenSumMarks(1) == 10);
 
             var moviesMark = reviewContext.GetMoviesMeanMark();
-            Debug.Assert((moviesMark.First( m => m.Item1 == "A").Item2 - 16.0 / 3) < 1e-9);
+            Debug.Assert((moviesMark.First(m => m.Item1 == "A").Item2 - 16.0 / 3) < 1e-9);
             Debug.Assert((moviesMark.First(m => m.Item1 == "B").Item2 - 14.0 / 2) < 1e-9);
         }
     }
