@@ -20,8 +20,12 @@ namespace DelegatesApp
         public void Notified(object sender, MarketEventArgs args)
         {
             var market = sender as Market;
-            var differenсу = args.NewPrice = args.OldPrice;
-            var count = stocks[args.Name];
+            var differenсу = args.NewPrice - args.OldPrice;
+            var count = 0;
+            if (stocks.Keys.Contains(args.Name))
+            {
+                count = stocks[args.Name];
+            }
             if (differenсу > 0 && stocks.ContainsKey(args.Name))
             {
                 market.Sell(args.Name, ref count, ref brokerMoney);
