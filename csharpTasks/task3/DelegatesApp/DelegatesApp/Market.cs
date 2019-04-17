@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DelegatesApp
@@ -12,6 +13,16 @@ namespace DelegatesApp
 
     public class MarketEventArgs
     {
+        public string NameOfShare;
+        public int UpdatedPrice;
+        public int OldPrice;
+
+        public MarketEventArgs(string name, int new_price, int old_price)
+        {
+            NameOfShare = name;
+            UpdatedPrice = new_price;
+            OldPrice = old_price;
+        }
         /*Здесь можно добавить что угодно, цену, название компании и т.п.*/
     }
 
@@ -36,7 +47,7 @@ namespace DelegatesApp
         // Добавляет подписчика
         public void AddSubscriber(ISubscriber sub)
         {
-            throw new NotImplementedException();
+            Notify += sub.Notified;
         }
 
         // Запускает ход торгов (устанавливает цену акциям) и уведомляет подписчиков
@@ -44,7 +55,9 @@ namespace DelegatesApp
         {
             // При реализации можно взять рандомную акцию, выставить у неё цену (тоже рандомно в некоторых пределах)
             // и проинформировать подписчиков
-            throw new NotImplementedException();
+            Random rnd = new Random();
+            string share = Shares.Keys.ElementAt(rnd.Next(0, Shares.Keys.Count));
+            Notify?.Invoke(this, new MarketEventArgs(share, rnd.Next(100, 1000), rnd.Next(100, 1000)));
         }
         
         /// <summary>
@@ -57,12 +70,16 @@ namespace DelegatesApp
         {
             // Покупка акций 
             // Биржа сама должна из одного мметса вычесть, в другое прибавить
+            account -= Shares[shareName];
+            count++;
         }
 
 
         public void Sell(string shareName, ref int count, ref int account)
         {
             // Продажа 
+            count -= 1;
+            account += Shares[shareName];
         }
     }
 }
