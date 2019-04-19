@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,7 +12,15 @@ namespace DelegatesApp
 
     public class MarketEventArgs
     {
-        /*Здесь можно добавить что угодно, цену, название компании и т.п.*/
+        public int old_price;
+        public int current_priсe;
+        public string share;
+
+        public MarketEventArgs(int old_priсe_, int new_priсe_, string share_) {
+            old_priсe = old_priсe_;
+            current_priсe = new_priсe_;
+            share = share_;
+        }
     }
 
     // Биржа, торгующая акциями
@@ -36,7 +44,7 @@ namespace DelegatesApp
         // Добавляет подписчика
         public void AddSubscriber(ISubscriber sub)
         {
-            throw new NotImplementedException();
+            Notify += sub.Notified;
         }
 
         // Запускает ход торгов (устанавливает цену акциям) и уведомляет подписчиков
@@ -44,9 +52,12 @@ namespace DelegatesApp
         {
             // При реализации можно взять рандомную акцию, выставить у неё цену (тоже рандомно в некоторых пределах)
             // и проинформировать подписчиков
-            throw new NotImplementedException();
-        }
-        
+            Random rnd = new Random();
+            string random_share = Shares.Keys.ElementAt(rnd.Next(0, Shares.Keys.Count));
+            int old_share_priсe = Shares[random_share];
+            Shares[random_share] = rnd.Next(500, 1501);
+            Notify?.Invoke(this, new MarketEventArgs(old_share_priсe, Shares[random_share], random_share));
+        }       
         /// <summary>
         /// Покупка акций
         /// </summary>
@@ -57,12 +68,16 @@ namespace DelegatesApp
         {
             // Покупка акций 
             // Биржа сама должна из одного мметса вычесть, в другое прибавить
+            account -= Shares[shareName];
+            count++;
         }
 
 
         public void Sell(string shareName, ref int count, ref int account)
         {
             // Продажа 
+            count--;
+            account += Shares[shareName];
         }
     }
 }
