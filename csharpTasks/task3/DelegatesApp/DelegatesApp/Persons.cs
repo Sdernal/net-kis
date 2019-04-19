@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,19 +20,33 @@ namespace DelegatesApp
     {
         public Person[] People { get; set; }
         
-        public Person GetOne()
+        public Person GetOne(Predicate<Person> predicate)
         {
-            throw new NotImplementedException();
+            foreach (var p in People) {
+                if (predicate(p)) {
+                    return p;
+                }
+            }
+            return null;
         }
 
         public IEnumerable<Person> GetAll()
         {
-            throw new NotImplementedException();
+            foreach (var p in People) {
+                if (predicate(p)) {
+                    yield return p;
+                }
+            }
         }
 
         public bool Contains()
         {
-            throw new NotImplementedException();
+            foreach (var p in People) {
+                if (predicate(p)) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
