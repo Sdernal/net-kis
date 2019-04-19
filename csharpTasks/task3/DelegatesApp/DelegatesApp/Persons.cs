@@ -20,19 +20,39 @@ namespace DelegatesApp
     {
         public Person[] People { get; set; }
         
-        public Person GetOne()
+        public Person GetOne(Predicate<Person> pred)
         {
-            throw new NotImplementedException();
+            foreach (var person in People)
+            {
+                if (pred(person))
+                {
+                    return person;
+                }
+            }
+            return null;
         }
 
-        public IEnumerable<Person> GetAll()
+        public IEnumerable<Person> GetAll(Predicate<Person> pred)
         {
-            throw new NotImplementedException();
+            foreach (var person in People)
+            {
+                if (pred(person))
+                {
+                    yield return person;
+                }
+            }
         }
 
-        public bool Contains()
+        public bool Contains(Predicate<Person> pred)
         {
-            throw new NotImplementedException();
+            foreach (var person in People)
+            {
+                if (pred(person))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

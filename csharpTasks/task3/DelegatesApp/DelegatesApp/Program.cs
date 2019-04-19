@@ -19,7 +19,7 @@ namespace DelegatesApp
                 new Person {Name="John", Age=19},
                 new Person {Name="Alice", Age=21}
             };
-
+            
             foreach (var p in container.GetAll(p => p.Age > 10))
             {
                 Console.WriteLine(p.ToString());
