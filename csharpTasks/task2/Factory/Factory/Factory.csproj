@@ -42,6 +42,7 @@
     <Compile Include="IMovable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Providers.cs" />
+    <Compile Include="Transports.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

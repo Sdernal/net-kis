@@ -17,7 +17,8 @@ namespace Factory
             car.Move(); // Просто выводит в консоль информацию о себе
 
             // Также можно задавать параметризованные провайдеры
-            TruckProvider truckProvider = new TruckProvider(600, "BELAZ");
+            //TruckProvider truckProvider = new TruckProvider(600, "BELAZ");
+            TruckProvider truckProvider = new TruckProvider("BELAZ", "Lyoha", 600);
             universalFactory.AddProvider(truckProvider);
             Truck truck = universalFactory.CreateTruck();
             truck.Move();
