@@ -24,10 +24,35 @@ namespace MyVector
             Vector two_rotated = two.Rotate(-angle).Normalize();
             Console.WriteLine("Two rotated and normalized: ");
             Console.WriteLine(two_rotated.x.ToString() + " " + two_rotated.y.ToString());
+            Vector twoRotated = two.Rotate(-angle).Normalize();
+            Console.WriteLine("Two rotated and normalized: ");
+            Console.WriteLine(twoRotated.x.ToString() + " " + twoRotated.y.ToString());
             Console.WriteLine("Three normalized:");
             Console.WriteLine(three.Normalize().x.ToString() + " " + three.Normalize().y.ToString());
             Console.WriteLine("DotProduct of orthogonals: ");
             Console.WriteLine(one.DotProduct(one.GetOrthogonal()));
+            
+            angle = (one - one).GetAngleBetween(three - three);
+            Console.WriteLine("Angle between two zeros vectors: ");
+            Console.WriteLine(angle.ToString());
+
+            try
+            {
+                two.Scale(0.0).GetOrthogonal();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            try
+            {
+                two = three / 0.0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }     
     }
 }

@@ -25,7 +25,8 @@ namespace MyVector
 
         }        
         */
-        public double x, y;
+        public double x { get; private set; }
+        public double y { get; private set; }
 
         /// <summary>
         /// Construct vector with coordinates
@@ -56,9 +57,7 @@ namespace MyVector
         public Vector Add(Vector v)
         {
             // throw new NotImplementedException();
-            this.x += v.x;
-            this.y += v.y;
-            return this;
+            return new Vector(this.x + v.x, this.y + v.y);
         }
 
         /// <summary>
@@ -69,9 +68,7 @@ namespace MyVector
         public Vector Scale(double k)
         {
             // throw new NotImplementedException();
-            this.x *= k;
-            this.y *= k;
-            return this;
+            return new Vector(this.x * k, this.y * k);
         }
 
         /// <summary>
@@ -114,40 +111,81 @@ namespace MyVector
         - +v, -v 
         */
         // Такая семантика у операторов в C#
+        /// <summary>
+        /// Sum
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="u"></param>
+        /// <returns></returns>
         public static Vector operator+ (Vector v, Vector u)
         {
             // throw new NotImplementedException();
             return new Vector(v.x + u.x, v.y + u.y);
         }    
 
+        /// <summary>
+        /// Difference
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="u"></param>
+        /// <returns></returns>
         public static Vector operator- (Vector v, Vector u)
         {
             return new Vector(v.x - u.x, v.y - u.y);
         }  
 
+        /// <summary>
+        /// Multiplication on the right number
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         public static Vector operator* (Vector v, double k)
         {
             return new Vector(v.x * k, v.y * k);
         }
 
+        /// <summary>
+        /// Multiplication on the left number
+        /// </summary>
+        /// <param name="k"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public static Vector operator* (double k, Vector v)
         {
             return new Vector(v.x * k, v.y * k);
         }
 
+        /// <summary>
+        /// Division on the number
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        /// <exception cref="DivideByZeroException"></exception>
         public static Vector operator/ (Vector v, double k)
         {
-            if (k == 0.0) {
+            if (Math.Abs(k) < 0.00001) {
                 throw new DivideByZeroException();
             }
             return new Vector(v.x / k, v.y / k);
         }
 
+        /// <summary>
+        /// Unary plus
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public static Vector operator+ (Vector v)
         {
             return new Vector(+v.x, +v.y);
         }
 
+        /// <summary>
+        /// Unary minus
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public static Vector operator- (Vector v)
         {
             return new Vector(-v.x, -v.y);

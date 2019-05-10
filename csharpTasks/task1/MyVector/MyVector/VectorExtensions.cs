@@ -23,7 +23,7 @@ namespace MyVector
         public static Vector Normalize(this Vector v)
         {
             // throw new NotImplementedException();
-            if (v.Length() == 0.0) {
+            if (Math.Abs(v.Length()) < 0.00001) {
                 return new Vector(0.0, 0.0);
             }
             return (v / v.Length());
@@ -33,6 +33,10 @@ namespace MyVector
         public static double GetAngleBetween(this Vector v, Vector u)
         {
             // throw new NotImplementedException();
+            if (Math.Abs(v.Length() * u.Length()) < 0.0000000001)
+            {
+                return 0.0;
+            }
             return Math.Acos(v.DotProduct(u) / (v.Length() * u.Length()));
         }
 
@@ -41,10 +45,10 @@ namespace MyVector
         {
             // throw new NotImplementedException();
             double product = v.DotProduct(u);
-            if (product == 0.0) {
+            if (Math.Abs(product) < 0.00001) {
                 return VectorRelation.Orthogonal;
             }
-            if (Math.Abs(product) == v.Length() * u.Length()) {
+            if (Math.Abs(Math.Abs(product) - v.Length() * u.Length()) < 0.000000001) {
                 return VectorRelation.Parallel;
             }
             return VectorRelation.General;
