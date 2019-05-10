@@ -56,7 +56,7 @@ namespace DelegatesApp
         public void Buy(string shareName, ref int count, ref int account)
         {
             // Покупка акций 
-            // Биржа сама должна из одного мметса вычесть, в другое прибавить
+            // Биржа сама должна из одного места вычесть, в другое прибавить
         }
 
 
