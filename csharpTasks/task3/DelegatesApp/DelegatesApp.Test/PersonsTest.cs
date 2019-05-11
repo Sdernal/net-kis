@@ -13,9 +13,9 @@ namespace DelegatesApp.Test
             PersonContainer container = new PersonContainer();
             container.People = GetTestPeople();
             var twenties = container.GetAll(p => p.Age > 20);
-            //Console.WriteLine(twenties);
-            Assert.Equal(twenties.Current.Name,"Alice");
-            //Assert.Equal(2, twenties.Count());
+            // Console.WriteLine(twenties);
+            // Assert.Equal(twenties.Current.Name,"Alice");
+            Assert.Equal(2, twenties.Count());
         }
 
         [Fact]

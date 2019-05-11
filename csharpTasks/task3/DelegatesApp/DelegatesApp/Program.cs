@@ -7,7 +7,8 @@ namespace DelegatesApp
         static void Main(string[] args)
         {
             Market market = new Market(new string[] { "Apple", "Google" });
-            market.AddSubscriber(new Broker());
+            market.AddSubscriber(new BrokerBuy());
+            market.AddSubscriber(new BrokerSell());
             for (int i = 0; i < 10; i++)
             {
                 market.Trade();
