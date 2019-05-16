@@ -54,10 +54,9 @@ namespace MyVector
         public static VectorRelation GetRelation(this Vector v, Vector u)
         {
             VectorRelation relation = VectorRelation.General;
-            Vector tmp = v;
-            if (tmp.CrossProduct(u) == 0)
+            if (v.CrossProduct(u) == 0)
                 relation = VectorRelation.Parallel;
-            else if (tmp.DotProduct(u) == 0)
+            else if (v.DotProduct(u) == 0)
                 relation = VectorRelation.Orthogonal;
             return relation;
         }
