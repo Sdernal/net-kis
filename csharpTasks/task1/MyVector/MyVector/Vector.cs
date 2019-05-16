@@ -25,7 +25,7 @@ namespace MyVector
 
         }        
         */
-        public double x, y;
+
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -36,6 +36,22 @@ namespace MyVector
             x = X;
             y = Y;
         }
+                /// <summary>
+        /// горизонтальная составляющая
+        /// </summary>
+        public double X
+        {
+            get => x;
+        }
+
+        /// <summary>
+        /// вертикальная составляющая
+        /// </summary>
+        public double Y
+        {
+            get => y;
+        }
+
         /// <summary>
         /// Длина вектора.
         /// </summary>
@@ -51,9 +67,7 @@ namespace MyVector
         /// <returns></returns>
         public Vector Add(Vector v)
         {
-            x += v.x;
-            y += v.y;
-            return this;
+            return new Vector(x + v.x, y + v.y);
         }
         /// <summary>
         /// Умножение вектора на число.
@@ -62,9 +76,7 @@ namespace MyVector
         /// <returns></returns>
         public Vector Scale(double k)
         {
-            x *= k;
-            y *= k;
-            return this;
+            return new Vector(x * k, y * k);
         }
         /// <summary>
         /// Скалярное произведение векторов
@@ -108,8 +120,7 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator +(Vector v, Vector u)
         {
-            Vector result = v;
-            return result.Add(u);
+            return new Vector(v.x + u.x, v.y + u.y);
         }
         /// <summary>
         /// Оператор разности векторов.
@@ -119,9 +130,7 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator -(Vector v, Vector u)
         {
-            Vector result = v;
-            Vector result2 = u;
-            return result.Add(result2.Scale(-1));
+            return new Vector(v.x - u.x, v.y - u.y);
         }
         /// <summary>
         /// Оператор умножения вектора на число.
@@ -131,8 +140,7 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator *(Vector v, double k)
         {
-            Vector result = v;
-            return result.Scale(k);
+            return new Vector(v.x * k, v.y * k);
         }
         /// <summary>
         /// Оператор умножения вектора на число.
@@ -153,7 +161,7 @@ namespace MyVector
         public static Vector operator /(Vector v, double k)
         {
             if (k == 0) throw new ArgumentException();
-            return v.Scale(1 / k);
+            return new Vector(v.x / k, v.y / k);
         }
         /// <summary>
         /// Оператор плюс.
@@ -162,7 +170,7 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator +(Vector v)
         {
-            return v;
+            return new Vector(v.x, v.y);
         }
         /// <summary>
         /// Оператор минус.
@@ -171,10 +179,11 @@ namespace MyVector
         /// <returns></returns>
         public static Vector operator -(Vector v)
         {
-            return v.Scale(-1);
+            return new Vector(-v.x, -v.y);
         }
 
-
+        private double x;
+        private double y;
         #endregion
     }
 }
