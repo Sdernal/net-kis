@@ -13,6 +13,15 @@ namespace MyVector
             Vector v1 = new Vector(1, 2);
             Vector v2 = new Vector(4, -3);
             double k = 5;
+            double k0 = 0;
+            try
+            {
+                Console.WriteLine(v1 / k0);
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("exception");
+            }
             Console.WriteLine($"{v1}");
             Console.WriteLine($"{v1}.Length() = {v1.Length()}");
             Console.WriteLine($"{v1}.Add({v2}) = {v1.Add(v2)}");
