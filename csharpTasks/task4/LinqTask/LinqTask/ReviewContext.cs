@@ -26,7 +26,7 @@ namespace LinqTask
         // Оценивал ли кто-нибудь фильм
         public bool IsMovieReviewed(string movieName)
         {
-           return reviews.Where(u => u.Movie == movieName).Count() != 0;
+           return reviews.Any(u => u.Movie == movieName);
         }
 
         // Получить общие фильмы у двух пользователей
