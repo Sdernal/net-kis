@@ -28,8 +28,8 @@ namespace MyVector
         /// <summary>
         /// Поля стуктуры гориз и вертикальная состовляющая
         /// </summary>
-        public double X;
-        public double Y;
+        public readonly double X;
+        public readonly double Y;
         /// <summary>
         /// Констркутор с параметрами для стукутуры
         /// </summary>
@@ -43,31 +43,27 @@ namespace MyVector
 
         public double Length()
         {
-            return Math.Sqrt(X*X + Y*Y);
+            return Math.Sqrt(this.X*this.X + this.Y*this.Y);
         }
 
         public Vector Add(Vector v)
         {
-            this.X += v.X;
-            this.Y += v.Y;
-            return this;
+            return new Vector(X + v.X, Y + v.Y);
         }
 
         public Vector Scale(double k)
         {
-            this.X *= k;
-            this.Y *= k;
-            return this;
+            return new Vector(X * k, Y * k);
         }
 
         public double DotProduct(Vector v)
         {
-            return this.X * v.X + this.Y * v.Y;
+            return X * v.X +Y * v.Y;
         }
 
         public double CrossProduct(Vector v)
         {
-            return this.X * v.Y - this.Y * v.X;
+            return X * v.Y - Y * v.X;
         }
 
         override public string ToString()
@@ -89,22 +85,46 @@ namespace MyVector
         /// <param name="u"></param>
         /// <returns></returns>
         public static Vector operator+ (Vector v, Vector u)
-        {
-            Vector new_vector = v;
-            return new_vector.Add(u);
+        { 
+            return v.Add(u);
         }        
+        /// <summary>
+        /// Разность двух векторов, возвращает новый вектор
+        /// </summary>
+        /// <param name="v">левый операнд</param>
+        /// <param name="u">правый операнд</param>
+        /// <returns></returns>
         public static Vector operator-(Vector v, Vector u)
         {
-            return new Vector(v.X - u.X, v.Y - u.Y);
+            return v.Add(-u);
         }
+
+        /// <summary>
+        ///Операция умножения вектора на скаляр в конечномерном линейном пространстве над полем действительных чисел
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         public static Vector operator*(Vector v, double k)
         {
-            return new Vector(v.X * k, v.Y * k);
+            return v.Scale(k);
         }
+        /// <summary>
+        /// Перегрузка предыдущего метода
+        /// </summary>
+        /// <param name="k"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public static Vector operator*(double k, Vector v)
         {
             return v * k;
         }
+        /// <summary>
+        /// операция деления вектора на число
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         public static Vector operator/(Vector v, double k)
         {
             if (k == 0) throw new ArgumentException();
