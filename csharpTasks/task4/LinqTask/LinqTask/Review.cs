@@ -5,7 +5,7 @@ using System.Text;
 namespace LinqTask
 {
     // Отзыв пользователя о фильме
-    class Review
+    public class Review
     {
         // Идентификатор клиента
         public int UserId { get; set; }
