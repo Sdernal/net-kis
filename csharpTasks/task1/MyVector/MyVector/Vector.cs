@@ -8,6 +8,8 @@ namespace MyVector
 {
     public struct Vector
     {
+        public const double Eps = 0.00001;
+        
         /* Нужно реализовать струкруру двумерный вектор (double X, double Y):
          - Добавить коструктор
          - Реализовать методы-заглушки:
@@ -165,7 +167,7 @@ namespace MyVector
         /// <exception cref="DivideByZeroException"></exception>
         public static Vector operator/ (Vector v, double k)
         {
-            if (Math.Abs(k) < 0.00001) {
+            if (Math.Abs(k) < Eps) {
                 throw new DivideByZeroException();
             }
             return new Vector(v.x / k, v.y / k);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyVector;
 
 namespace MyVector
 {
@@ -23,7 +24,7 @@ namespace MyVector
         public static Vector Normalize(this Vector v)
         {
             // throw new NotImplementedException();
-            if (Math.Abs(v.Length()) < 0.00001) {
+            if (Math.Abs(v.Length()) < Vector.Eps) {
                 return new Vector(0.0, 0.0);
             }
             return (v / v.Length());
@@ -33,7 +34,7 @@ namespace MyVector
         public static double GetAngleBetween(this Vector v, Vector u)
         {
             // throw new NotImplementedException();
-            if (Math.Abs(v.Length() * u.Length()) < 0.0000000001)
+            if (Math.Abs(v.Length() * u.Length()) < Vector.Eps)
             {
                 return 0.0;
             }
@@ -45,10 +46,10 @@ namespace MyVector
         {
             // throw new NotImplementedException();
             double product = v.DotProduct(u);
-            if (Math.Abs(product) < 0.00001) {
+            if (Math.Abs(product) < Vector.Eps) {
                 return VectorRelation.Orthogonal;
             }
-            if (Math.Abs(Math.Abs(product) - v.Length() * u.Length()) < 0.000000001) {
+            if (Math.Abs(Math.Abs(product) - v.Length() * u.Length()) < Vector.Eps) {
                 return VectorRelation.Parallel;
             }
             return VectorRelation.General;
