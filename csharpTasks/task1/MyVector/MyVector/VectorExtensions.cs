@@ -28,12 +28,13 @@ namespace MyVector
         public static Vector Normalize(this Vector v)
         {
             if (v.X == 0 && v.Y == 0) return v;
-            return v.Scale(1 / v.Length());
+            return v / v.Length();
         }
 
         // Получить угол между векторами в радианах
         public static double GetAngleBetween(this Vector v, Vector u)
         {
+            if (v.Length() == 0 || u.Length() == 0) throw new ArgumentException("Длина одного из векторов - 0");
             return Math.Acos(v.DotProduct(u) / v.Length() / u.Length());
         }
 
