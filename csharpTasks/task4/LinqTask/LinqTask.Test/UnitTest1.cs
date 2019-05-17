@@ -2,6 +2,7 @@ using NUnit.Framework;
 using LinqTask;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Tests
 {
@@ -17,6 +18,7 @@ namespace Tests
                 new Review {UserId = 1, Mark = 5, Movie="Game of thrones"},
                 new Review {UserId = 1, Mark = 10, Movie="The Lord of the rings"},
                 new Review {UserId = 1, Mark = 8, Movie="Avatar"},
+                new Review {UserId = 1, Mark = 4, Movie = "Avengers"},
                 new Review {UserId = 2, Mark = 10, Movie="Titanic"},
                 new Review {UserId = 2, Mark = 10, Movie="The quent Don"},
                 new Review {UserId = 2, Mark = 9, Movie="Master and Margaret"},
@@ -60,58 +62,48 @@ namespace Tests
             Assert.IsEmpty(_reviews.GetUserReviews(ListOfReviews.Count() + 10));
         }
 
-        [TestCase(1, 6)]
-        [TestCase(2, 4)]
-        [TestCase(3, 7)]
-        [TestCase(100, 10)]
-        [TestCase(1, 20)]
-        public void BestMovies(int userId, int minimalRate)
+        [TestCase(1, 6, new string[] { "Avatar", "The Lord of the rings"})]
+        [TestCase(2, 10, new string[] { })]
+        [TestCase(3, 7, new string[] {"The reader"})]
+        [TestCase(100, 3, new string[] { })]
+        [TestCase(1, 20, new string[] { })]
+        public void BestMovies(int userId, int minimalRate, string[] testMovies)
         {
-            var bestMovies = ListOfReviews.Where(r => r.UserId == userId && r.Mark > minimalRate).OrderBy(x => x.Mark).Select(x => x.Movie);
-            var MoviesFromReviews = _reviews.GetFavouritesResources(userId, minimalRate);
-            Assert.AreEqual(MoviesFromReviews.Count(), bestMovies.Count());
-            int i = 0;
-            foreach (var movie in bestMovies)
+            var movies = _reviews.GetFavouritesResources(userId, minimalRate);
+            if(testMovies.Count() == 0)
             {
-                Assert.IsTrue(MoviesFromReviews.ElementAt(i++) == movie);
+                Assert.IsEmpty(movies);
             }
-            
-        }
-
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(1000)]
-        public void SumMarks(int userId)
-        {
-            var sum = ListOfReviews.Where(r => r.UserId == userId && r.Mark % 2 == 0).Select(r => r.Mark).Sum();
-            Assert.AreEqual(_reviews.GetUserEvenSumMarks(userId), sum, 1e-3);
-        }
-
-        [Test]
-        public void MoviesMeanMark()
-        {
-            var movies = ListOfReviews.GroupBy(r => r.Movie).Select(r => r.Key);
-            foreach(var movie in movies)
+            for(int i = 0; i < movies.Count(); i++)
             {
-                var avg = ListOfReviews.Where(r => r.Movie == movie).Select(r => r.Mark).Average();
-                Assert.AreEqual(_reviews.GetMoviesMeanMark().Where(r => r.Item1 == movie).First().Item2, avg, 1e-3);
+                Assert.AreEqual(testMovies[i], movies.ElementAt(i));
             }
         }
 
-        [TestCase (1, 2)]
-        [TestCase(1, 1000)]
-        public void UsersComparation(int user1, int user2)
+        [TestCase(1, 22)]
+        [TestCase(2, 20)]
+        [TestCase(3, 14)]
+        [TestCase(1000, 0)]
+        public void SumMarks(int userId, double trueSum)
         {
-            var CommonMovies = ListOfReviews.Where(u => u.UserId == user1)
-                .Select(u => u.Movie)
-                .Intersect(ListOfReviews.Where(u => u.UserId == user2)
-                .Select(u => u.Movie));
-            Assert.AreEqual(CommonMovies, _reviews.CompareUsers(user1, user2));
-            foreach(var film in CommonMovies)
-            {
-                Assert.IsTrue(_reviews.CompareUsers(user1, user2).Contains(film));
-            }
+            Assert.AreEqual(trueSum, _reviews.GetUserEvenSumMarks(userId), 1e-3);
+        }
+
+        [TestCase("Game of thrones", 5)]
+        [TestCase("Avengers", 4)]
+        [TestCase("Titanic", 10)]
+        public void MoviesMeanMark(string film, double Mark)
+        {
+            var MoviesMeanRank = _reviews.GetMoviesMeanMark();
+            Assert.IsNotEmpty(MoviesMeanRank.Where(r => r.Item1 == film));
+            Assert.AreEqual(MoviesMeanRank.Where(r => r.Item1 == film).First().Item2, Mark, 1e-3);
+        }
+
+        [TestCase(1, 3, new string[] { "Avengers" })]
+        [TestCase(1, 2, new string[] { })]
+        public void UsersComparation(int user1, int user2, string [] commonFilms) 
+        {
+            Assert.IsTrue(new HashSet<string>(_reviews.CompareUsers(user1, user2)).SetEquals(commonFilms));
         }
 
     }
