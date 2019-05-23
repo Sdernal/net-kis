@@ -1,0 +1,45 @@
+@* @{ *@
+@*     ViewBag.Title = "Calculator"; *@
+@*     Layout = null; *@
+@* } *@
+
+@{
+    ViewBag.Title = "Calculator";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+    <title>Calculator</title>
+</head>
+
+<body>
+    <div>
+        <form action="Result" method="post">
+        Value 1
+        <input type="text" name="value1"/>
+        <br />
+        Value 2
+        <input type="text" name="value2"/>
+        <br />
+        <input type="radio" name="operation" value="+"/>+<br />
+        <input type="radio" name="operation" value="-"/>-<br />
+        <input type="radio" name="operation" value="*"/>*<br />
+        <input type="radio" name="operation" value="/"/>/<br />
+        <input type="submit" value="Equals" />
+        </form>
+        
+    </div> 
+</body>
+
+<h2>Calculator</h2>
+
+</html>
+
+
+
+
